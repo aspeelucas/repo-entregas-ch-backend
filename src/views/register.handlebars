@@ -1,0 +1,102 @@
+
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+    <link rel="stylesheet" href="./css/{{fileCss}}" />
+  </head>
+  <body>
+
+    <div class="containerLoginGral">
+      <div class="containerLogin">
+        <div class="containerTitle">
+          <h1>Registro</h1>
+        </div>
+
+        <form action="/api/sessions" method="post">
+          <div class="mb-3 containerInput">
+            <label for="exampleInputEmail1" class="form-label label">
+              Nombre
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              required
+              name="first_name"
+              aria-describedby="emailHelp"
+            />
+
+          </div>
+          <div class="mb-3 containerInput">
+            <label for="exampleInputEmail1" class="form-label label">Apellido
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              required
+              name="last_name"
+              aria-describedby="emailHelp"
+            />
+
+          </div>
+          <div class="mb-3 containerInput">
+            <label for="exampleInputEmail1" class="form-label label">Correo
+              Electronico
+            </label>
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              required
+              name="email"
+              aria-describedby="emailHelp"
+            />
+
+          </div>
+          <div class="mb-3 containerInput">
+            <label
+              for="exampleInputPassword1"
+              class="form-label"
+            >Contraseña</label>
+            <input
+              type="password"
+              name="password"
+              required
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+
+          <div class="mb-3 containerInput">
+            <label
+              for="exampleInputEmail1"
+              class="form-label label"
+            >Edad</label>
+            <input
+              type="number"
+              class="form-control"
+              id="exampleInputEmail1"
+              required
+              name="age"
+              aria-describedby="emailHelp"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Registrarse</button>
+        <button
+            type="button"
+            onclick="location.href='/login'"
+            class="btn btn-primary"
+          >Volver</button>
+        </form>
+
+      </div>
+
+    </div>
+
+  </body>
+</html>

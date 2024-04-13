@@ -1,0 +1,113 @@
+[
+    {
+      
+      "title": "Lenovo",
+      "price": 2000,
+      "description": "pc portatil",
+      "thumbnail": [],
+      "code": 123,
+      "stock": 10,
+      "status": true,
+      "category": "computadoras"
+    },
+    {
+      
+      "title": "Samsung",
+      "price": 1000,
+      "description": "celular",
+      "thumbnail": [],
+      "code": 124,
+      "stock": 11,
+      "status": true,
+      "category": "computadoras"
+    },
+    {
+      
+      "title": "Ipad",
+      "price": 1500,
+      "description": "tablet",
+      "thumbnail": [],
+      "code": 125,
+      "stock": 12,
+      "status": true,
+      "category": "computadoras"
+    },
+    {
+      
+      "title": "Motorola",
+      "price": 1000,
+      "description": "celular",
+      "thumbnail": [],
+      "code": 127,
+      "stock": 14,
+      "status": true,
+      "category": "computadoras"
+    },
+    {
+      
+      "title": "Samsung",
+      "price": 1000,
+      "description": "galaxy",
+      "thumbnail": [],
+      "code": 128,
+      "stock": 15,
+      "status": true,
+      "category": "computadoras"
+    },
+    {
+      
+      "title": "LG",
+      "price": 1000,
+      "description": "lavarropa",
+      "thumbnail": [],
+      "code": 129,
+      "stock": 16,
+      "status": true,
+      "category": "computadoras"
+    },
+    {
+     
+      "title": "Sony",
+      "price": 1000,
+      "description": "televisor",
+      "thumbnail": [],
+      "code": 130,
+      "stock": 17,
+      "status": true,
+      "category": "computadoras"
+    },
+    {
+      
+      "title": "Philips",
+      "price": 1000,
+      "description": "televisor",
+      "thumbnail": [],
+      "code": 131,
+      "stock": 18,
+      "status": true,
+      "category": "computadoras"
+    },
+    {
+      
+      "title": "Hitachi",
+      "price": 1000,
+      "description": "televisor",
+      "thumbnail": [],
+      "code": 132,
+      "stock": 19,
+      "status": true,
+      "category": "computadoras"
+    },
+    {
+      
+      "title": "Noblex",
+      "price": 1000,
+      "description": "televisor",
+      "thumbnail": [],
+      "code": 133,
+      "stock": 20,
+      "status": true,
+      "category": "computadoras"
+    }
+  ]
+  

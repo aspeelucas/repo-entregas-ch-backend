@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/{{fileCss}}" />
+  </head>
+  <body>
+    <div>
+      <div>
+        <h1>Productos en tiempo Real</h1>
+      </div>
+      <h2>Agregar Producto</h2>
+      <div class="formSyle">
+        <form class="formCuerpo">
+          <div>
+            <input
+              required
+              type="text"
+              name="title"
+              id="titleId"
+              placeholder="Titulo"
+            />
+            <input
+              required
+              type="number"
+              name="price"
+              id="priceId"
+              placeholder="Precio"
+            />
+            <input
+              required
+              type="text"
+              name="description"
+              id="descriptionId"
+              placeholder="Descripcion"
+            />
+            <input
+              required
+              type="text"
+              name="category"
+              id="categoryId"
+              placeholder="Categoria"
+            />
+            <input
+              type="text"
+              name="thumbnail"
+              id="thumbnailId"
+              placeholder="Thumbnail"
+            />
+            <input
+              required
+              type="number"
+              name="code"
+              id="codeId"
+              placeholder="Code"
+            />
+            <input
+              required
+              type="number"
+              name="stock"
+              id="stockId"
+              placeholder="Stock"
+            />
+            <input  type="checkbox" name="status" id="statusId" /><label
+              for="status"
+            >Estado</label>
+          </div>
+          <div>
+            <input required type="submit" value="Enviar" />
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <h4>Lista de Productos en Tiempo Real</h4>
+        <div id="inRealTime"> </div>
+      </div>
+
+      <script
+        src="https://cdn.socket.io/4.7.3/socket.io.min.js"
+        integrity="sha384-+miq58Ltmjm+SSP5g8Ok6dpMO/6R4n8xe/x1Yj0Bdb9kiEz25LTnWv/GZQTRQamg"
+        crossorigin="anonymous"
+      ></script>
+      <script src="/js/main.js"></script>
+    </div>
+  </body>
+</html>

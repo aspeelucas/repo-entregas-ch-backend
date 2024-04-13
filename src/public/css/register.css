@@ -1,0 +1,63 @@
+
+
+.containerLoginGral{
+    /* background-color: #99E4F3; */
+    background-image: url(../img/black-white-bokeh-particles.jpg);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerLogin{
+    background-color:#d3f0f6c5 ;
+    position: absolute;
+    border-radius: 20px;
+    width: 20%;
+}
+.containerTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    font-weight: 700;
+    
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    margin-top: 10px;
+}
+
+button{
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 35%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.btn-primary{
+    border-color: none;
+    border-radius: 20px;
+    background-color: #17CAEC;
+    --bs-btn-border-color: none;
+    --bs-btn-hover-bg: #73d9ee;
+}
+label{
+    font-weight: 600;
+    margin-left: 2px;
+}
+.containerInput{
+width: 80%;
+}
