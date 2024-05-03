@@ -12,7 +12,9 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import Handlebars from "handlebars";
 import passport from "passport";
+import cookieParser from "cookie-parser";
 import initializePassport from "./config/passport.config.js";
+
 
 connectDb();
 
@@ -35,28 +37,18 @@ const productDefault = async () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./src/public"));
-app.use(
-  session({
-    secret: "secretCoder",
-    resave: true,
-    saveUninitialized: true,
-    store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://aspeelucas:1D4amlIQuSpEfW4E@backend.iwzkkok.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=backend",
-      ttl: 100,
-    }),
-  })
-);
+
 // passport
-initializePassport();
 app.use(passport.initialize());
-app.use(passport.session());
+initializePassport();
+app.use(cookieParser());
 
 // Routes
 app.use("/api/products", productsRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/sessions", sessionsRouter);
 app.use("/", viewRouter);
+
 
 // Socket.io
 const io = new Server(httpServer);

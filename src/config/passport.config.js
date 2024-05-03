@@ -1,8 +1,12 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import GithubStrategy from "passport-github2";
+import { CartManager } from "../controllers/carts-manager.js";
+import { Strategy as LocalStrategyJwt, ExtractJwt } from "passport-jwt";
 import { userModel } from "../models/user.model.js";
 import { isValidPassword, createHash } from "../utils/hashbcrypt.js";
+
+const cartManager = new CartManager();
 
 const initializePassport = () => {
   passport.use(
@@ -88,18 +92,19 @@ const initializePassport = () => {
         callbackURL: "http://localhost:8080/api/sessions/githubcallback",
       },
       async (accessToken, refeshToken, profile, done) => {
-        
         try {
           let user = await userModel.findOne({ email: profile._json.email });
           if (user) {
             return done(null, user);
           } else {
+            const cart = await cartManager.addCart();
             const newUser = {
               first_name: profile._json.name,
               last_name: "Github",
               age: 18,
               email: profile._json.email,
               password: "",
+              cart: cart._id,
             };
             const result = await userModel.create(newUser);
             return done(null, result);
@@ -110,6 +115,33 @@ const initializePassport = () => {
       }
     )
   );
+
+  // estrategia jwt
+
+  passport.use(
+    "jwt",
+    new LocalStrategyJwt(
+      {
+        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+        secretOrKey: "secretTokenPrivate",
+      },
+      async (jwt_payload, done) => {
+        try {
+          return done(null, jwt_payload);
+        } catch (error) {
+          return done(error);
+        }
+      }
+    )
+  );
+};
+
+const cookieExtractor = (req) => {
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies["coderCookie"];
+  }
+  return token;
 };
 
 export default initializePassport;

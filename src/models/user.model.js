@@ -1,3 +1,4 @@
+
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
@@ -25,8 +26,12 @@ const userSchema = new mongoose.Schema({
     },
     rol:{
         type: String,
+        enum: ['admin', 'user'],
         default: 'user'
     },
+    cart:{
+        type: String, 
+    }
 
 });
 
