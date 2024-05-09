@@ -1,10 +1,25 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+import configObjet from "./config/config.js";
+const {mongo_url} = configObjet;
 
-export async function connectDb() {
-  try {
-    await mongoose.connect("mongodb+srv://aspeelucas:1D4amlIQuSpEfW4E@backend.iwzkkok.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=backend");
-    console.log("Database connected");
-  } catch (error) {
-    console.log("Error in conection", error);
+
+
+class DataBase{
+  static #instance ;
+  constructor(){
+    mongoose.connect(mongo_url);
+  }
+  static getInstance(){
+    if(this.#instance){
+      console.log("Ya existe una instancia de la base de datos");
+      return this.#instance;
+    }
+    this.#instance = new DataBase();
+    console.log("Se ha creado una instancia de la base de datos");
+    return this.#instance;
   }
 }
+
+
+export default DataBase.getInstance();

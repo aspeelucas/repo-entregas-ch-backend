@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
 import { productModel } from "../models/product.model.js";
 
-export class ProductManager {
+class ProductService {
   async addProduct({
     title,
     description,
@@ -10,7 +9,6 @@ export class ProductManager {
     stock,
     category,
     thumbnails,
-
   }) {
     try {
       if (!title || !description || !price || !code || !stock || !category) {
@@ -32,7 +30,7 @@ export class ProductManager {
         code,
         stock,
         category,
-        status:true,
+        status: true,
         thumbnails: thumbnails || [],
       });
 
@@ -46,9 +44,13 @@ export class ProductManager {
     }
   }
 
-  async getProducts(limit=10, page=1 ,sort, query = {}) {
+  async getProducts(limit = 10, page = 1, sort, query = {}) {
     try {
-      const products = await productModel.paginate(query, {limit, page,sort});
+      const products = await productModel.paginate(query, {
+        limit,
+        page,
+        sort,
+      });
       return products;
     } catch (error) {
       console.log("Error al obtener productos", error);
@@ -79,6 +81,7 @@ export class ProductManager {
       console.error(`Error al actuliazar el producto:`, error.message);
     }
   }
+
   async deleteProduct(id) {
     try {
       const productDeleted = await productModel.findByIdAndDelete(id);
@@ -92,3 +95,5 @@ export class ProductManager {
     }
   }
 }
+
+export default ProductService;

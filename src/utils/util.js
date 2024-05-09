@@ -1,4 +1,5 @@
 import passport from "passport";
+import Handlebars from "handlebars";
 
 const passportCall = (strategy) => {
   return async (req, res, next) => {
@@ -48,5 +49,30 @@ const unauthorizedRouteRedirectLogin = () => {
   };
 };
 
+const handleBarsSet= ()=>{
+  Handlebars.registerHelper("if_eq", function (a, b, opts) {
+    if (a === b) {
+      return opts.fn(this);
+    } else {
+      return opts.inverse(this);
+    }
+  });
+  
+  Handlebars.registerHelper("getUpdatedQuery", function (a, b, opts) {
+    const result = Object.entries(a)
+      .map((query) => {
+        if (query[0].includes(b)) {
+          return "";
+        }
+  
+        return query.join("=");
+      })
+      .join("&");
+  
+    return result;
+  });
+}
 
-export { passportCall, authorization ,unauthorizedRoute, unauthorizedRouteRedirectLogin};
+
+
+export { passportCall, authorization ,unauthorizedRoute, unauthorizedRouteRedirectLogin,handleBarsSet};
