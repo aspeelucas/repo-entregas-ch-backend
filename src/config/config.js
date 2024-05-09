@@ -3,7 +3,7 @@ import program from '../utils/commander.js';
 
 const { mode } = program.opts();
 dotenv.config({
-    path: mode === 'production' ? './.env.production' : './.env.development'
+    path: mode === 'production' ? './.env.prod' : './.env'
 });
 
 
