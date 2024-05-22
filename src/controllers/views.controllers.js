@@ -1,9 +1,12 @@
 import ProductService from "../services/products.service.js";
 import CartService from "../services/carts.service.js";
+import TicketService from "../services/ticket.service.js";
 import UserDto from "../dto/user.dto.js";
+
 
 const productService = new ProductService();
 const cartService = new CartService();
+const ticketService = new TicketService();
 
 class ViewsController {
   async getProducts(req, res) {
@@ -126,6 +129,17 @@ class ViewsController {
         user: req.user,
       });
     }
+  }
+
+  async checkout(req, res) {
+    try {
+      const { cid } = req.params;
+      const findTicket = await ticketService.getTicket(cid);
+      res.render("checkout", { fileCss: "checkout.css", ticket: findTicket });  
+    } catch (error) {
+      
+    }
+
   }
 }
 

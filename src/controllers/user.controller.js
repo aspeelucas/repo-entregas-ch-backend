@@ -21,7 +21,7 @@ class UserController {
             ? "admin"
             : "user";
 
-        const cart = await cartServices.addCart();
+        const cart = await cartServices.addCart(email);
         const newUser = {
           first_name,
           last_name,

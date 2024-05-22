@@ -77,8 +77,6 @@ const handleBarsSet= ()=>{
     return a * b;
   });
 
-
-
 }
 
 

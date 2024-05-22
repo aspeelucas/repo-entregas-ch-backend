@@ -51,3 +51,19 @@ const deleteAllProducts = async (idCart) => {
     console.log(error);
   }
 };
+
+const checkOut = async (idCart) => {
+  try {
+    const response = await fetch(`/api/cart/${idCart}/purchase`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    alert("Compra realizada correctamente");
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

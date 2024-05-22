@@ -111,8 +111,9 @@ class CartController {
     // Agrega un carrito
 
     async addCart(req, res) {
+      const user = req.user.email;
       try {
-        const cartId = await cartService.addCart();
+        const cartId = await cartService.addCart(user);
         return res.json({ message: "El carrito fue agregado con exito", cartId });
       } catch (error) {
         console.log("Error al agregar carrito", error);
@@ -147,7 +148,6 @@ class CartController {
     }
 
   }
-
 
 }
 

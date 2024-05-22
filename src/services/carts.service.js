@@ -9,9 +9,9 @@ const usersService= new UsersService();
 
 
 class CartService {
-  async addCart() {
+  async addCart(user) {
     try {
-      const cart = new cartModel({ products: [] });
+      const cart = new cartModel({ products: [], user });
       await cart.save();
       return cart;
     } catch (error) {
@@ -90,6 +90,20 @@ class CartService {
     }
   }
 
+  async updateCart(cid, updatedProducts){
+    try {
+        const cart = await this.getCart(cid);
+
+        cart.products = updatedProducts;
+
+        cart.markModified("products");
+        await cart.save();
+        return cart;
+    } catch (error) {
+        throw new Error(`${error}`);
+    }
+}
+
   async deleteProductFromCart(cartId, productId) {
     try {
       const cart = await cartModel.findById(cartId);
@@ -141,38 +155,7 @@ class CartService {
     }
   }
 
-  async finishPurchase(cartId) {
-
-    try {
-      console.log(cartId)
-      const cart = await this.getCart(cartId);
-      const products = cart.products;
-      const productService = new ProductService();
-      const storeProducts = await productService.getProducstById(products.map((item) => item._id));
-      const user = await usersService.findUserByCartId(cartId);
-      const allowedProducts = storeProducts.filter((product) => {
-        const item = products.find((item) => item.product.toString() === product._id.toString());
-        return product.stock >= item.quantity;
-      });
-      console.log(allowedProducts)
-      const updatedCart = products.filter((item) => {
-        return allowedProducts.find((product) => product._id.toString() !== item._id.toString());
-      });
-
-      await this.udpateProductFromCart(cartId, updatedCart);
-
-      await ticketService.addTicket({
-        amount: allowedProducts.map((item) => item.product.price).reduce((acc, item) => acc + item, 0),
-        purchaser: user.email,
-      })
-
-      console.log("Compra finalizada");
-      return cart;
-    } catch (error) {
-      console.log(`Error al finalizar la compra ${error}`);
-      throw error;
-    }
-  }
+  
 }
 
 export default CartService;
