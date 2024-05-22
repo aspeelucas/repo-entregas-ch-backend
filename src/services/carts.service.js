@@ -1,4 +1,12 @@
 import { cartModel } from "../models/cart.model.js";
+import ProductService from "./products.service.js";
+import TicketService from "./ticket.service.js";
+import UsersService from "./users.service.js";
+
+
+const ticketService = new TicketService();
+const usersService= new UsersService();
+
 
 class CartService {
   async addCart() {
@@ -16,11 +24,13 @@ class CartService {
     try {
       const cart = await this.getCart(id);
       const productExist = cart.products.find(
-        (item) => item.product.toString() === productId
+        (item) => item.product._id.toString() === productId
       );
 
       if (productExist) {
         productExist.quantity += quantity;
+
+
       } else {
         cart.products.push({ product: productId, quantity });
       }
@@ -127,6 +137,39 @@ class CartService {
       }
     } catch (error) {
       console.log(`Error al eliminar el carrito ${error}`);
+      throw error;
+    }
+  }
+
+  async finishPurchase(cartId) {
+
+    try {
+      console.log(cartId)
+      const cart = await this.getCart(cartId);
+      const products = cart.products;
+      const productService = new ProductService();
+      const storeProducts = await productService.getProducstById(products.map((item) => item._id));
+      const user = await usersService.findUserByCartId(cartId);
+      const allowedProducts = storeProducts.filter((product) => {
+        const item = products.find((item) => item.product.toString() === product._id.toString());
+        return product.stock >= item.quantity;
+      });
+      console.log(allowedProducts)
+      const updatedCart = products.filter((item) => {
+        return allowedProducts.find((product) => product._id.toString() !== item._id.toString());
+      });
+
+      await this.udpateProductFromCart(cartId, updatedCart);
+
+      await ticketService.addTicket({
+        amount: allowedProducts.map((item) => item.product.price).reduce((acc, item) => acc + item, 0),
+        purchaser: user.email,
+      })
+
+      console.log("Compra finalizada");
+      return cart;
+    } catch (error) {
+      console.log(`Error al finalizar la compra ${error}`);
       throw error;
     }
   }

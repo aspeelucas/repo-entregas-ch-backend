@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-import { passportCall } from "../utils/util.js";
+import { authorization, passportCall } from "../utils/util.js";
 import UserController from "../controllers/user.controller.js";
 
 const usersController = new UserController();
@@ -18,6 +18,7 @@ sessionsRouter.get(
     session: false,
     failureRedirect: "/api/sessions/failedregister",
   }),
+  authorization("user"),
   usersController.currentUser
 );
 
@@ -44,7 +45,4 @@ sessionsRouter.get("/failedlogin", (req, res) => {
   res.status(400).send("Error al loguear usuario");
 });
 
-sessionsRouter.get("/logout", async (req, res) => {
-  res.clearCookie("coderCookie");
-  res.redirect("/login");
-});
+sessionsRouter.get("/logout", usersController.logout);

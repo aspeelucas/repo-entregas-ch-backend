@@ -23,6 +23,12 @@ const socketController = (httpServer) => {
     // Get all products
     socket.emit("allProducts", await productDefault());
 
+    // Get one product
+    socket.on("get-product", async (_id) => {
+      const product = await productService.getProductById(_id);
+      socket.emit("product", product);
+    });
+
     // Add product
     socket.on("new-product", async (data) => {
       console.log(data);
@@ -36,6 +42,21 @@ const socketController = (httpServer) => {
         socket.emit("allProducts", await productDefault());
       } catch (error) {
         console.error("Error al agregar producto", error);
+      }
+    });
+
+    // Update product
+    socket.on("update-product", async ({id,data}) => {
+      data.price = Number(data.price);
+      data.code = Number(data.code);
+      data.stock = Number(data.stock);
+      console.log(data,id);
+
+      try {
+        await productService.udpateProduct(id,data);
+        socket.emit("allProducts", await productDefault());
+      } catch (error) {
+        console.error("Error al actualizar producto", error);
       }
     });
 

@@ -1,5 +1,6 @@
 import ProductService from "../services/products.service.js";
 import CartService from "../services/carts.service.js";
+import UserDto from "../dto/user.dto.js";
 
 const productService = new ProductService();
 const cartService = new CartService();
@@ -32,6 +33,7 @@ class ViewsController {
       if (!products || page > products.totalPages || page < 1) {
         return res.render("productError", { fileCss: "productError.css" });
       }
+
 
       res.render("products", {
         status: "success",
@@ -69,7 +71,7 @@ class ViewsController {
 
   async chat(req, res) {
     try {
-      res.render("chat", { fileCss: "chat.css" });
+      res.render("chat", { fileCss: "chat.css", user: req.user});
     } catch (error) {
       res.render("productError", { fileCss: "productError.css" });
       console.log("error al obtener productos ", error);
@@ -107,6 +109,23 @@ class ViewsController {
 
   async login(req, res) {
     res.render("login", { fileCss: "login.css" });
+  }
+
+  async currentUser(req, res) {
+    try {
+      const user = req.user;
+      if (!user) {
+        return res.redirect("/login");
+      }
+      const userDto = new UserDto(user);
+      res.render("current", { fileCss: "profile.css", userDto });
+    } catch (error) {
+      console.error("Error al obtener el usuario", error);
+      return res.render("productError", {
+        fileCss: "productError.css",
+        user: req.user,
+      });
+    }
   }
 }
 

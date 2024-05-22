@@ -83,36 +83,52 @@
     gap: 10px;
 }
 
+/* navbar */
 .menuCollap{
     display: flex;
     justify-content: start;
     align-items: start;
-}
-
-.menuCollap p {
+  }
+  
+  .menuCollap p {
   
     color: white;
     text-align: center;
-}
-
-.menuCollap i{
+  }
+  
+  .menuCollap i{
     text-decoration: none;
     color: white;
     font-size: 15px;
-}
-
-.containerLogOut{
+  }
+  
+  .containerLogOut{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-}
-
-.textoRol{
+    flex-direction: column;
+  }
+  
+  .textoRol{
     margin: 0px;
-}
-
-.buttonLogOut{
+  }
+  
+  .buttonLogOut{
     font-size: 14px;
    
-}
+  }
+  
+  .navBarOpt{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .infoUserNav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }

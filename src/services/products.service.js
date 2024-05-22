@@ -68,6 +68,16 @@ class ProductService {
     }
   }
 
+  async getProducstById(ids) {
+    try {
+      const products = await productModel.find({ _id: { $in: ids } });
+      return products;
+    } catch (error) {
+      console.log("Error al obtener productos", error);
+      throw error;
+    }
+  }
+
   async udpateProduct(id, product) {
     try {
       const productUpdate = await productModel.findByIdAndUpdate(id, product);

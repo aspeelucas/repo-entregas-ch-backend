@@ -1,0 +1,68 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/{{fileCss}}" />
+</head>
+<nav class="navbar navbar-expand-lg  bg-dark " data-bs-theme="dark">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="/products">Ecommerce</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse menuCollap " id="navbarSupportedContent">
+
+            <div class=" ms-auto w-0 navBarOpt ">
+                <div>
+                    <a class="navbar-brand" href="/products">Productos</a>
+                    <a class="navbar-brand" href="/products">Carrito</a>
+                    <a class="navbar-brand" href="/current">Perfil</a>
+                </div>
+
+                <div class="containerLogOut">
+                    <p class="textoRol">Bienvenido : {{userDto.email}} </p>
+                    <div class="infoUserNav">
+                        <p class="textoRol">Rol :<i class="bi bi-person-fill"></i> {{userDto.role}} </p>
+                        <a href="/api/sessions/logout" type="button" class="btn btn-dark buttonLogOut">Cerrar Sesion <i
+                                class="bi bi-box-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<body>
+    <div class="containerFather">
+        <div class="containerProfile">
+            <h1>Perfil de usuario</h1>
+            <h2>Nombre: {{userDto.name}}</h2>
+            <h3>Apellido: {{userDto.surname}}</h2>
+                <h2>Email: {{userDto.email}}</h2>
+                <h3>Rol: {{userDto.role}}</h2>
+                    <h2>Nombre completo: {{userDto.fullName}}</h2>
+                    <div class="optProfileButton">
+                        
+                        
+                       
+                         {{#if_eq userDto.role "user"}} <a href="/chat" type="button" class="btn btn-primary">Chat<i class="bi bi-chat-dots"></i></a>{{/if_eq}}
+                         {{#if_eq userDto.role "user"}}<a href="/products" type="button" class="btn btn-primary">Productos<i class="bi bi-bag"></i></a>{{/if_eq}}
+                          {{#if_eq userDto.role "user"}}<a href="/carts/{{userDto.cart}}" type="button" class="btn btn-primary"> Carrito<i class="bi bi-cart-plus"></i></a>{{/if_eq}}
+                           {{#if_eq userDto.role "admin"}}<a href="/realtimeproducts" type="button" class="btn btn-primary">Gestion<i class="bi bi-pencil"></i></a>{{/if_eq}}
+                        
+                        
+                    </div>
+                    <div class="logoutButtonProfile">
+                        <a href="/api/sessions/logout" type="button" class="btn btn-primary">Cerrar sesion<i class="bi bi-box-arrow-right"></i></a>
+
+                    </div>
+        </div>
+    </div>
+</body>
+
+</html>

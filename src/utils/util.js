@@ -45,7 +45,8 @@ const unauthorizedRouteRedirectLogin = () => {
         return res.redirect("/login");
       }
       next();
-    })(req, res, next);
+    })
+    (req, res, next);
   };
 };
 
@@ -71,8 +72,21 @@ const handleBarsSet= ()=>{
   
     return result;
   });
+
+  Handlebars.registerHelper("multiply", function (a, b) {
+    return a * b;
+  });
+
+
+
+}
+
+
+const codeGenerator = () => {
+  return new Date().getTime().toString(36).slice(-5);
 }
 
 
 
-export { passportCall, authorization ,unauthorizedRoute, unauthorizedRouteRedirectLogin,handleBarsSet};
+
+export { passportCall, authorization ,unauthorizedRoute, unauthorizedRouteRedirectLogin,handleBarsSet,codeGenerator};

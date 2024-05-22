@@ -12,25 +12,34 @@
 </head>
 
 <nav class="navbar navbar-expand-lg  bg-dark " data-bs-theme="dark">
-  <div class="container-fluid ">
-    <a class="navbar-brand" href="/products">Ecommerce</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse menuCollap " id="navbarSupportedContent">
-      <div class=" ms-auto w-0 ">
-        <p class="textoRol">Bienvenido : {{user.email}} </p>
-        <div class="containerLogOut">
-          <div>
-            <p class="textoRol">Rol :<i class="bi bi-person-fill"></i> {{user.rol}} </p>
-          </div>
-          <a href="/api/sessions/logout" type="button" class="btn btn-dark buttonLogOut">Cerrar Sesion <i
-              class="bi bi-box-arrow-right"></i></a>
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="/products">Ecommerce</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse menuCollap " id="navbarSupportedContent">
+
+            <div class=" ms-auto w-0 navBarOpt ">
+                <div>
+                    <a class="navbar-brand" href="/products">Productos</a>
+                    <a class="navbar-brand" href="/carts/{{user.cart}}">Carrito</a>
+                    <a class="navbar-brand" href="/current">Perfil</a>
+                </div>
+
+                <div class="containerLogOut">
+                    <p class="textoRol">Bienvenido : {{user.email}} </p>
+                    <div class="infoUserNav"> 
+                        <p class="textoRol">Rol :<i class="bi bi-person-fill"></i> {{user.rol}} </p>
+                    <a href="/api/sessions/logout" type="button" class="btn btn-dark buttonLogOut">Cerrar Sesion <i
+                            class="bi bi-box-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </nav>
 <body>
     <div class="titlePrincipal">
@@ -97,11 +106,10 @@
         <p class="card-text">Stock disponible: {{this.stock}} und</p>
         <p class="card-text">Categoria: {{this.category}}</p>
         <p class="card-text">Id: {{this._id}}</p>
-        <a href="#" class="btn btn-primary">Agregar a carrito</a>
+         <a id="addToCart" onclick="addCart('{{../user.cart}}','{{this._id}}')" class="btn btn-primary">Agregar a carrito</a>
       </div>
     </div>
     {{/each}}
-
 
   </div>
   <div class="acctionsButtonPage">
@@ -120,5 +128,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+    <script src="/js/cart.js"></script>
 </body>
 </html>

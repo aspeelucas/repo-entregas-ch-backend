@@ -133,6 +133,21 @@ class CartController {
       }
     }
 
+  // Finalizar compra
+
+  async finishPurchase(req, res) {
+
+    const { cid } = req.params;
+    try {
+      await cartService.finishPurchase(cid);
+      return res.json({ status: "success", message: "Compra finalizada con exito" });
+    } catch (error) {
+      console.error("Error al finalizar la compra", error);
+      return res.status(500).json({ status: "error", error: "Error interno del servidor" });
+    }
+
+  }
+
 
 }
 

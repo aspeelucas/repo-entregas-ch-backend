@@ -1,14 +1,11 @@
 import UsersService from "../services/users.service.js";
-import CartController from "./cart.controller.js";
+import CartService from "../services/carts.service.js";
 import { createHash, isValidPassword } from "../utils/hashbcrypt.js";
 import generateToken from "../utils/jsonwebtoken.js";
-import { passportCall } from "../utils/util.js";
-import { CartManager } from "../controllers/carts-manager.js";
 
 // ver agregar a carrito en user controller
 
-const cartManager = new CartManager();
-const cartServices = new CartController();
+const cartServices = new CartService();
 const usersService = new UsersService();
 
 class UserController {
@@ -24,7 +21,7 @@ class UserController {
             ? "admin"
             : "user";
 
-        const cart = await cartManager.addCart();
+        const cart = await cartServices.addCart();
         const newUser = {
           first_name,
           last_name,
@@ -37,8 +34,11 @@ class UserController {
         const user = await usersService.addUser(newUser);
         const token = generateToken({
           email: user.email,
-          id: user._id,
           rol: user.rol,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          id : user._id,
+          cart: user.cart,
         });
         res
           .status(200)
@@ -46,7 +46,7 @@ class UserController {
             maxAge: 60 * 60 * 1000,
             httpOnly: true,
           })
-          .redirect("/products");
+          .redirect("/current");
       }
     } catch (error) {
       res.status(400).send("Error al registrar usuario");
@@ -64,8 +64,11 @@ class UserController {
       }
       const token = generateToken({
         email: userExists.email,
-        id: userExists._id,
         rol: userExists.rol,
+        first_name: userExists.first_name,
+        last_name: userExists.last_name,
+        id : userExists._id,
+        cart: userExists.cart,
       });
 
       res
@@ -74,7 +77,7 @@ class UserController {
           maxAge: 60 * 60 * 1000,
           httpOnly: true,
         })
-        .redirect("/products");
+        .redirect("/current");
     } catch (error) {
       res.status(400).send("Error al loguear usuario");
     }
@@ -95,8 +98,11 @@ class UserController {
 
     const token = generateToken({
       email: req.user.email,
-      id: req.user._id,
       rol: req.user.rol,
+      first_name: req.user.first_name,
+      last_name: req.user.last_name,
+      id : req.user._id,
+      cart: req.user.cart,
     });
 
     res
@@ -105,14 +111,13 @@ class UserController {
         maxAge: 60 * 60 * 1000,
         httpOnly: true,
       })
-      .redirect("/products");
+      .redirect("/current");
   }
 
-  async logout(req, res) {   
-      res.clearCookie("coderCookie");
-      res.redirect("/login");
-    };
-  
+  async logout(req, res) {
+    res.clearCookie("coderCookie");
+    res.redirect("/login");
+  }
 }
 
 export default UserController;
