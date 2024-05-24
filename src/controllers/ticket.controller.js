@@ -13,8 +13,6 @@ class TicketController {
     try {
       const cart = await cartService.getCart(cartId);
       const products = cart.products;
-      console.log(products);
-
       const productsNotAvailable = [];
 
       for (const item of products) {
@@ -24,36 +22,37 @@ class TicketController {
           product.stock -= item.quantity;
           await product.save();
         } else {
-          productsNotAvailable.push(productId);
+          productsNotAvailable.push({
+            product: productId,
+            quantity: item.quantity,
+          });
         }
       }
-
-      const userWitchCart = await userModel.findOne({ cart: cartId });
-
-      const newTicket = await ticketService.generateTicket(cart);
-
-      cart.products = cart.products.filter((item) =>
-        productsNotAvailable.some((id) => id != item.product)
+      const productsAvailables = cart.products.filter((item) =>
+        productsNotAvailable.every(
+          ({ product }) => product._id != item.product._id
+        )
       );
-      await cart.save();
+      
 
-      res.render("check", {
-        fileCss: "checkout.css",
-        ticket: newTicket,
-        cliente: userWitchCart.first_name,
-        email: userWitchCart.email,
-        numTicket: newTicket._id,
-      });
-     
+      const newTicket = await ticketService.generateTicket(
+        productsAvailables,
+        cart.user
+      );
+
+      cart.products = productsNotAvailable;
+
+      await cart.save();
+      return res.json(newTicket);
     } catch (error) {
       res.status(400).send(`Error al realizar la compra :${error}`);
     }
   }
 
-  async getTickets(req, res) {
+  async getTicket(req, res) {
     try {
-      const { cid } = req.params;
-      const tickets = await ticketService.getTicket(cid);
+      const { ticketId } = req.params;
+      const tickets = await ticketService.getTicket(ticketId);
       res.status(200).send(tickets);
     } catch (error) {
       res.status(400).send(`Error al obtener los tickets ${error}`);

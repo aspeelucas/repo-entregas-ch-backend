@@ -4,11 +4,11 @@ import { codeGenerator } from "../utils/util.js";
 class TicketService {
 
 
-  async generateTicket(cart) {
+  async generateTicket(products, user) {
     const code = codeGenerator();
     try {
-      if (cart.products[0] != null) {
-        const amount = cart.products.reduce(
+      if (products[0] != null) {
+        const amount = products.reduce(
           (total, item) => total + item.product.price * item.quantity,
           0
         );
@@ -17,7 +17,7 @@ class TicketService {
           code: code,
           purchase_date: Date.now(),
           amount,
-          purchaser: cart.user,
+          purchaser: user,
         });
 
         await newTicket.save();

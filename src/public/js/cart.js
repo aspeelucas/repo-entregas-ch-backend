@@ -55,15 +55,15 @@ const deleteAllProducts = async (idCart) => {
 const checkOut = async (idCart) => {
   try {
     const response = await fetch(`/api/cart/${idCart}/purchase`, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
     });
     const data = await response.json();
-    alert("Compra realizada correctamente");
-    return data;
+    location.replace(`/checkout/${data._id}`);
   } catch (error) {
     console.log(error);
+    alert("Error al realizar la compra");
   }
 };

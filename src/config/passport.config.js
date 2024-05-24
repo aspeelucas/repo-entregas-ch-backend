@@ -1,12 +1,14 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import GithubStrategy from "passport-github2";
-import { CartManager } from "../controllers/carts-manager.js";
+
 import { Strategy as LocalStrategyJwt, ExtractJwt } from "passport-jwt";
 import { userModel } from "../models/user.model.js";
 import { isValidPassword, createHash } from "../utils/hashbcrypt.js";
+import CartService from "../services/carts.service.js";
 
-const cartManager = new CartManager();
+
+const cartService = new CartService();
 
 const initializePassport = () => {
   passport.use(
@@ -97,7 +99,7 @@ const initializePassport = () => {
           if (user) {
             return done(null, user);
           } else {
-            const cart = await cartManager.addCart();
+            const cart = await cartService.addCart(user.email);
             const newUser = {
               first_name: profile._json.name,
               last_name: "Github",

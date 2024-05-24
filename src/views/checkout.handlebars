@@ -1,1 +1,17 @@
-<h1>El monto de tu compra es : {{ticket._id}}</h1>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/{{fileCss}}" />
+  </head>
+  <body>
+    <h2>Detalle de tu Compra:</h2>
+    <p>Codigo de la orden: {{ticket.code}}</p>
+    <p>Fecha de compra: {{ticket.purchase_date}}</p>
+    <p>Monto total : ${{ticket.amount}}</p>
+    <p>Comprador: {{ticket.purchaser}}</p>
+    </p>
+    <a href="/products" type="button" class="btn btn-primary">Regresar<i class="bi bi-box-arrow-right"></i></a>
+  </body>
+</html>

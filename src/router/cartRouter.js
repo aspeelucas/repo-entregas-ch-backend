@@ -23,8 +23,8 @@ cartRouter.delete("/:cid", cartController.deleteAllProductsFromCart);
 
 cartRouter.delete("/delete/:cid", cartController.deleteCart);
 
-cartRouter.get("/:cid/purchase", ticketController.checkOut);
+cartRouter.post("/:cid/purchase", ticketController.checkOut);
 
-cartRouter.get("/checkout/:cid", ticketController.getTickets);
+cartRouter.get("/checkout/:cid", ticketController.getTicket);
 
 

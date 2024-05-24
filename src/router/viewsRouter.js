@@ -37,10 +37,9 @@ viewRouter.get(
   viewsController.getCart
 );
 
-viewRouter.get("/checkout/:cid" , passport.authenticate("jwt",{ session: false ,failureRedirect:"/login"}), viewsController.checkout);
+viewRouter.get("/checkout/:cid" , passport.authenticate("jwt",{ session: false ,failureRedirect:"/login"}),authorization("user"), viewsController.checkout);
 
  
-
 // Rutas de autenticación
 
 viewRouter.get("/register", unauthorizedRoute(), viewsController.register);

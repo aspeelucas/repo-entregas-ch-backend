@@ -135,11 +135,13 @@ class ViewsController {
     try {
       const { cid } = req.params;
       const findTicket = await ticketService.getTicket(cid);
+      if (!findTicket) {
+        return res.render("productError", { fileCss: "productError.css" });
+      }
       res.render("checkout", { fileCss: "checkout.css", ticket: findTicket });  
     } catch (error) {
       
     }
-
   }
 }
 
