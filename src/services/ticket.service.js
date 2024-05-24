@@ -1,5 +1,8 @@
 import { ticketModel } from "../models/ticket.model.js";
 import { codeGenerator } from "../utils/util.js";
+import EmailService from "./email.services.js";
+
+const emailService = new EmailService();
 
 class TicketService {
 
@@ -19,7 +22,8 @@ class TicketService {
           amount,
           purchaser: user,
         });
-
+        
+        await emailService.sendEmail(newTicket.purchaser, newTicket.code, newTicket.amount, newTicket.purchase_date, products.map((item) => item.product.title + " " + item.quantity));
         await newTicket.save();
         console.log("Ticket generado con exito" + newTicket) ;
         return newTicket;
