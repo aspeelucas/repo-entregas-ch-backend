@@ -4,6 +4,7 @@ import {
   authorization,
   unauthorizedRoute,
   unauthorizedRouteRedirectLogin,
+  generateProducts,
 } from "../utils/util.js";
 import ViewsController from "../controllers/views.controllers.js";
 
@@ -22,7 +23,12 @@ viewRouter.get(
   viewsController.getRealTimeProducts
 );
 
-viewRouter.get("/chat", passport.authenticate("jwt",{ session: false ,failureRedirect:"/login"}),authorization("user"),  viewsController.chat);
+viewRouter.get(
+  "/chat",
+  passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  authorization("user"),
+  viewsController.chat
+);
 
 viewRouter.get(
   "/products",
@@ -37,13 +43,25 @@ viewRouter.get(
   viewsController.getCart
 );
 
-viewRouter.get("/checkout/:cid" , passport.authenticate("jwt",{ session: false ,failureRedirect:"/login"}),authorization("user"), viewsController.checkout);
+viewRouter.get(
+  "/checkout/:cid",
+  passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  authorization("user"),
+  viewsController.checkout
+);
 
- 
 // Rutas de autenticación
 
 viewRouter.get("/register", unauthorizedRoute(), viewsController.register);
 
 viewRouter.get("/login", unauthorizedRoute(), viewsController.login);
 
-viewRouter.get("/current", passport.authenticate("jwt",{ session: false ,failureRedirect:"/login"}) , viewsController.currentUser);
+viewRouter.get(
+  "/current",
+  passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  viewsController.currentUser
+);
+
+// Rutas Mock
+
+viewRouter.get("/mockingproducts",viewsController.mockingProducts);

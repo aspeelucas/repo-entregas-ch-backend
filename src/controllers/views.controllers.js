@@ -2,6 +2,7 @@ import ProductService from "../services/products.service.js";
 import CartService from "../services/carts.service.js";
 import TicketService from "../services/ticket.service.js";
 import UserDto from "../dto/user.dto.js";
+import { generateProducts } from "../utils/util.js";
 
 
 const productService = new ProductService();
@@ -142,6 +143,19 @@ class ViewsController {
     } catch (error) {
       
     }
+  }
+
+  async mockingProducts(req, res) {
+    const products = [];
+    for (let i = 0; i < 100; i++) {
+      products.push(generateProducts());
+    }
+
+    res.render("mockingProducts", {
+      status: "success",
+      payload: products,
+      fileCss: "mock.css",
+    });
   }
 }
 

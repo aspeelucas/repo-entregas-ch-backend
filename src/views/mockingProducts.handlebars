@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/{{fileCss}}" />
+</head>
+<nav class="navbar navbar-expand-lg  bg-dark " data-bs-theme="dark">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="/products">Ecommerce</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse menuCollap " id="navbarSupportedContent">
+
+            <div class=" ms-auto w-0 navBarOpt ">
+                <div>
+                    <a class="navbar-brand" href="/products">Productos</a>
+                    <a class="navbar-brand" href="/current">Perfil</a>
+                </div>
+
+                <div class="containerLogOut">
+                    <p class="textoRol">Bienvenido : {{user.email}} </p>
+                    <div class="infoUserNav">
+                        <p class="textoRol">Rol :<i class="bi bi-person-fill"></i> {{user.rol}} </p>
+                        <a href="/api/sessions/logout" type="button" class="btn btn-dark buttonLogOut">Cerrar Sesion <i
+                                class="bi bi-box-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<body>
+    <div class="productListContainer">
+        {{#each payload}}
+        <div class="card" style="width: 20rem;">
+            <img src={{this.thumbnail}} class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Marca {{this.title}}</h5>
+                <p class="card-text">Descripcion: {{this.description}}</p>
+                <p class="card-text">Precio: $ {{this.price}}</p>
+                <p class="card-text">Stock disponible: {{this.stock}} und</p>
+                <p class="card-text">Categoria: {{this.category}}</p>
+                <p class="card-text">Id: {{this._id}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</body>
+
+</html>

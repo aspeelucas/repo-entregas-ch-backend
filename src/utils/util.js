@@ -1,5 +1,6 @@
 import passport from "passport";
 import Handlebars from "handlebars";
+import { faker } from "@faker-js/faker";
 
 const passportCall = (strategy) => {
   return async (req, res, next) => {
@@ -85,6 +86,23 @@ const codeGenerator = () => {
 }
 
 
+// Faker Mock
+
+const generateProducts = () => {
+  return {
+    _id: faker.database.mongodbObjectId(),
+    title: faker.commerce.product(),
+    description: faker.commerce.productName(),
+    category: faker.commerce.department(),
+    price: parseInt(faker.commerce.price({ min: 1000, max: 2000, dec: 0 })),
+    thumbnail: faker.image.avatar(),
+    code: codeGenerator(),
+    stock: parseInt(faker.string.numeric()),
+    status: true,
+  };
+};
 
 
-export { passportCall, authorization ,unauthorizedRoute, unauthorizedRouteRedirectLogin,handleBarsSet,codeGenerator};
+
+
+export { passportCall, authorization ,unauthorizedRoute, unauthorizedRouteRedirectLogin,handleBarsSet,codeGenerator,generateProducts};

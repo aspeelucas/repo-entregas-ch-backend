@@ -1,0 +1,57 @@
+.productListContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+    gap: 40px;
+}
+
+.menuCollap{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+  }
+  
+  .menuCollap p {
+  
+    color: white;
+    text-align: center;
+  }
+  
+  .menuCollap i{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+  }
+  
+  .containerLogOut{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .textoRol{
+    margin: 0px;
+  }
+  
+  .buttonLogOut{
+    font-size: 14px;
+   
+  }
+  
+  .navBarOpt{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .infoUserNav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
