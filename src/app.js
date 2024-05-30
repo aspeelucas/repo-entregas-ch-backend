@@ -10,6 +10,7 @@ import cookieParser from "cookie-parser";
 import initializePassport from "./config/passport.config.js";
 import socketController from "./controllers/socket.io.controller.js";
 import { handleBarsSet } from "./utils/util.js";
+import compression from "express-compression";
 
 const app = express();
 const PORT = 8080;
@@ -21,6 +22,7 @@ const httpServer = app.listen(PORT, () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./src/public"));
+app.use(compression());
 
 // passport
 app.use(passport.initialize());

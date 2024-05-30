@@ -1,5 +1,9 @@
 import ProductService from "../services/products.service.js";
 const productService = new ProductService();
+import CustomError from "../services/errors/custom-error.js";
+import { EErrors } from "../services/errors/enum.js";
+import { getErrorInfo } from "../services/errors/info.js";
+
 
 class ProductController {
   async addProduct(req, res) {
@@ -67,7 +71,9 @@ class ProductController {
         throw new Error("Producto no encontrado");
       }
       const productUpdate = req.body;
-      const { title, price, description, thumbnail, code, stock, status } =
+      const { title, price, description, thumbnail, code, stock, status, 
+        category
+       } =
         productUpdate;
       if (
         !title ||
@@ -76,9 +82,24 @@ class ProductController {
         !code ||
         !stock ||
         !status ||
-        !thumbnail
+        !thumbnail||
+        !category
       ) {
-        throw new Error("Faltan campos obligatorios");
+        throw CustomError.createError({
+          name: "Datos incompletos o no validos",
+          source: getErrorInfo({ 
+            title, 
+            price, 
+            description, 
+            thumbnail, 
+            code, 
+            stock, 
+            status,
+            category
+          }, 9),
+          message: "Datos incompletos o no validos",
+          code: EErrors.BAD_REQUEST,
+        })
       }
 
       await productService.udpateProduct(pid, productUpdate);

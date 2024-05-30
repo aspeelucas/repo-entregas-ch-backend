@@ -1,4 +1,7 @@
 import { productModel } from "../models/product.model.js";
+import CustomError from "./errors/custom-error.js";
+import { EErrors } from "./errors/enum.js";
+import { getErrorInfo } from "./errors/info.js";
 
 class ProductService {
   async addProduct({
@@ -12,7 +15,12 @@ class ProductService {
   }) {
     try {
       if (!title || !description || !price || !code || !stock || !category) {
-        throw new Error("Todos los campos son obligatorios");
+        throw CustomError.createError({
+          name:"Todos los campos son obligatorios",
+          source:getErrorInfo({title,description,price,code,stock,category},2),
+          message:"Error al crear un producto",
+          code:EErrors.MISSING_FIELDS
+        })
       }
 
       const codeExist = await productModel.findOne({
@@ -20,7 +28,12 @@ class ProductService {
       });
 
       if (codeExist) {
-        throw new Error("El codigo ya existe");
+        throw CustomError.createError({
+          name:"Codigo ya existe",
+          source:getErrorInfo({code},4),
+          message:"Codigo ya existe",
+          code:EErrors.INVALID_CODE
+        })
       }
 
       const newProduct = new productModel({
@@ -51,6 +64,14 @@ class ProductService {
         page,
         sort,
       });
+      if (products.docs.length === 0) {
+        throw CustomError.createError({
+          name:"Productos no encontrados",
+          source:getErrorInfo({},7),
+          message:"Productos no encontrados",
+          code:EErrors.NOT_FOUND
+        })
+      }
       return products;
     } catch (error) {
       console.log("Error al obtener productos", error);
@@ -64,7 +85,12 @@ class ProductService {
       console.log("Producto encontrado");
       return findProduct;
     } else {
-      throw new Error(`Product Not Found`);
+      throw CustomError.createError({
+        name:"Producto no encontrado",
+        source:getErrorInfo({_id:id},3),
+        message:"Producto no encontrado",
+        code:EErrors.NOT_FOUND
+      })
     }
   }
 
@@ -85,7 +111,12 @@ class ProductService {
         console.log("Producto actualizado");
         return productUpdate;
       } else {
-        throw new Error(`No se pudo actualizar el producto`);
+        throw CustomError.createError({
+          name:"Error al actualizar el producto",
+          source:getErrorInfo({_id:id, product},8),
+          message:"Error al actualizar el producto",
+          code:EErrors.MISSING_FIELDS
+        })
       }
     } catch (error) {
       console.error(`Error al actuliazar el producto:`, error.message);
@@ -98,7 +129,12 @@ class ProductService {
       if (productDeleted) {
         console.log("Producto borrado");
       } else {
-        throw new Error(`No se pudo borrar el producto`);
+        throw CustomError.createError({
+          name:"Error al borrar el producto",
+          source:getErrorInfo({_id:id},3),
+          message:"Error al borrar el producto",
+          code:EErrors.NOT_FOUND
+        })
       }
     } catch (error) {
       console.error(`Error al borrar el producto:`, error.message);

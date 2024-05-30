@@ -1,17 +1,20 @@
 import { cartModel } from "../models/cart.model.js";
-import ProductService from "./products.service.js";
-import TicketService from "./ticket.service.js";
-import UsersService from "./users.service.js";
-
-
-const ticketService = new TicketService();
-const usersService= new UsersService();
-
+import { getErrorInfo } from "./errors/info.js";
+import CustomError from "./errors/custom-error.js";
+import { EErrors } from "./errors/enum.js";
 
 class CartService {
   async addCart(user) {
     try {
       const cart = new cartModel({ products: [], user });
+      if (!cart) {
+        throw CustomError.createError({
+          name: "Carritos no creado",
+          source: getErrorInfo({}, 5),
+          message: "Error al crear un carrito",
+          code: EErrors.DB_ERROR,
+        });
+      }
       await cart.save();
       return cart;
     } catch (error) {
@@ -29,8 +32,6 @@ class CartService {
 
       if (productExist) {
         productExist.quantity += quantity;
-
-
       } else {
         cart.products.push({ product: productId, quantity });
       }
@@ -47,6 +48,14 @@ class CartService {
   async getCarts() {
     try {
       const carts = await cartModel.find();
+      if (!carts) {
+        throw CustomError.createError({
+          name: "Carritos no encontrados",
+          source: getErrorInfo({}, 5),
+          message: "Error al obtener los carritos",
+          code: EErrors.DB_ERROR,
+        });
+      }
       return carts;
     } catch (error) {
       console.log(`Error al obtener los carritos ${error}`);
@@ -57,12 +66,15 @@ class CartService {
     try {
       const cart = await cartModel.findById(id);
 
-      if (cart) {
-        return cart;
-      } else {
-        console.log(`El carrito con el id ${id} no existe`);
-        throw new Error(`Not Found`);
+      if (!cart) {
+        throw CustomError.createError({
+          name: "Carrito no encontrado",
+          source: getErrorInfo({ id }, 6),
+          message: "Error al obtener el carrito",
+          code: EErrors.NOT_FOUND,
+        });
       }
+      return cart;
     } catch (error) {
       console.log(`Error al obtener el carrito ${error}`);
       throw error;
@@ -74,7 +86,12 @@ class CartService {
       const cart = await cartModel.findById(cartId);
 
       if (!cart) {
-        throw new Error("Carrito no encontrado");
+        throw CustomError.createError({
+          name: "Carrito no encontrado",
+          source: getErrorInfo({ id: cartId }, 6),
+          message: "Error al obtener el carrito",
+          code: EErrors.NOT_FOUND,
+        });
       }
 
       cart.products = updatedProducts;
@@ -90,26 +107,30 @@ class CartService {
     }
   }
 
-  async updateCart(cid, updatedProducts){
+  async updateCart(cid, updatedProducts) {
     try {
-        const cart = await this.getCart(cid);
+      const cart = await this.getCart(cid);
 
-        cart.products = updatedProducts;
+      cart.products = updatedProducts;
 
-        cart.markModified("products");
-        await cart.save();
-        return cart;
+      cart.markModified("products");
+      await cart.save();
+      return cart;
     } catch (error) {
-        throw new Error(`${error}`);
+      throw new Error(`${error}`);
     }
-}
+  }
 
   async deleteProductFromCart(cartId, productId) {
     try {
       const cart = await cartModel.findById(cartId);
-
       if (!cart) {
-        throw new Error("Carrito no encontrado");
+        throw CustomError.createError({
+          name: "Carrito no encontrado",
+          source: getErrorInfo({ id: cartId }, 6),
+          message: "Error al obtener el carrito",
+          code: EErrors.NOT_FOUND,
+        });
       }
 
       cart.products = cart.products.filter(
@@ -128,6 +149,14 @@ class CartService {
   async deleteAllProductsFromCart(id) {
     try {
       const cart = await this.getCart(id);
+      if (!cart) {
+        throw CustomError.createError({
+          name: "Carrito no encontrado",
+          source: getErrorInfo({ id }, 6),
+          message: "Error al eliminar todos los productos del carrito",
+          code: EErrors.NOT_FOUND,
+        });
+      }
       cart.products = [];
       cart.markModified("products");
       await cart.save();
@@ -139,23 +168,24 @@ class CartService {
     }
   }
 
-  async deleteCart (id) {
+  async deleteCart(id) {
     try {
       const cart = await cartModel.findByIdAndDelete(id);
-      if (cart) {
-        console.log(`El carrito con el id ${id} fue eliminado correctamente`);
-        return cart;
-      } else {
-        console.log(`El carrito con el id ${id} no existe`);
-        throw new Error(`Not Found`);
+      if (!cart) {
+        throw CustomError.createError({
+          name: "Carrito no encontrado",
+          source: getErrorInfo({ id }, 6),
+          message: "Error al eliminar un carrito",
+          code: EErrors.NOT_FOUND,
+        });
       }
+      console.log("Carrito eliminado con exito");
+      return cart;
     } catch (error) {
       console.log(`Error al eliminar el carrito ${error}`);
       throw error;
     }
   }
-
-  
 }
 
 export default CartService;
