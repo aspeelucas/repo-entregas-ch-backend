@@ -16,7 +16,7 @@ class EmailService {
     try {
       await this.transporter.sendMail({
         from: "Ecommerce Top <aspeelucas@gmail.com>",
-        to: "themarveg@gmail.com",
+        to: `${user}`,
         subject: "Test email",
         html: `
         <h1>Confirmacion de compra</h1>
