@@ -56,7 +56,7 @@ class ViewsController {
         category,
       });
     } catch (error) {
-      console.log("error al obtener productos ", error);
+      req.logger.error("Error al obtener los productos", error);
       res.render("productError", { fileCss: "productError.css" });
     }
   }
@@ -69,7 +69,7 @@ class ViewsController {
       });
     } catch (error) {
       res.render("productError", { fileCss: "productError.css" });
-      console.log("error al obtener productos ", error);
+      req.logger.error("Error al obtener los productos", error);
     }
   }
 
@@ -78,7 +78,7 @@ class ViewsController {
       res.render("chat", { fileCss: "chat.css", user: req.user});
     } catch (error) {
       res.render("productError", { fileCss: "productError.css" });
-      console.log("error al obtener productos ", error);
+      req.logger.error("Error al ingresar al chat", error);
     }
   }
 
@@ -102,7 +102,7 @@ class ViewsController {
         fileCss: "cart.css",
       });
     } catch (error) {
-      console.error("Error al obtener el carrito", error);
+      req.logger.error("Error al obtener el carrito", error);
       return res.render("productError", { fileCss: "productError.css" });
     }
   }
@@ -124,7 +124,7 @@ class ViewsController {
       const userDto = new UserDto(user);
       res.render("current", { fileCss: "profile.css", userDto });
     } catch (error) {
-      console.error("Error al obtener el usuario", error);
+      req.logger.error("Error al obtener el usuario", error);
       return res.render("productError", {
         fileCss: "productError.css",
         user: req.user,

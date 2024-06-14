@@ -82,7 +82,6 @@ class ProductService {
   async getProductById(id) {
     const findProduct = await productModel.findById(id);
     if (findProduct) {
-      console.log("Producto encontrado");
       return findProduct;
     } else {
       throw CustomError.createError({
@@ -108,7 +107,6 @@ class ProductService {
     try {
       const productUpdate = await productModel.findByIdAndUpdate(id, product);
       if (productUpdate) {
-        console.log("Producto actualizado");
         return productUpdate;
       } else {
         throw CustomError.createError({
@@ -127,7 +125,6 @@ class ProductService {
     try {
       const productDeleted = await productModel.findByIdAndDelete(id);
       if (productDeleted) {
-        console.log("Producto borrado");
       } else {
         throw CustomError.createError({
           name:"Error al borrar el producto",

@@ -4,7 +4,6 @@ import CustomError from "../services/errors/custom-error.js";
 import { EErrors } from "../services/errors/enum.js";
 import { getErrorInfo } from "../services/errors/info.js";
 
-
 class ProductController {
   async addProduct(req, res) {
     const product = req.body;
@@ -27,7 +26,8 @@ class ProductController {
         sort,
         query
       );
-      res.json({
+      req.logger.info("Productos obtenidos correctamente");
+      return res.json({
         status: "success",
         payload: products,
         totalPages: products.totalPages,
@@ -44,6 +44,7 @@ class ProductController {
           : null,
       });
     } catch (error) {
+      req.logger.error("Error al obtener los productos", error);
       res
         .status(500)
         .json({ status: "error", error: "Error interno del servidor" });
@@ -55,8 +56,10 @@ class ProductController {
       const { pid } = req.params;
       const product = await productService.getProductById(pid);
       if (product) {
+        req.logger.info(`Producto obtenido correctamente ${product}`);
         return res.json(product);
       }
+      req.logger.error("Producto no encontrado");
       return res.status(404).json({ error: "Producto no encontrado" });
     } catch (error) {
       res.status(500).json({ error: "Error interno del servidor" });
@@ -71,10 +74,16 @@ class ProductController {
         throw new Error("Producto no encontrado");
       }
       const productUpdate = req.body;
-      const { title, price, description, thumbnail, code, stock, status, 
-        category
-       } =
-        productUpdate;
+      const {
+        title,
+        price,
+        description,
+        thumbnail,
+        code,
+        stock,
+        status,
+        category,
+      } = productUpdate;
       if (
         !title ||
         !price ||
@@ -82,27 +91,31 @@ class ProductController {
         !code ||
         !stock ||
         !status ||
-        !thumbnail||
+        !thumbnail ||
         !category
       ) {
         throw CustomError.createError({
           name: "Datos incompletos o no validos",
-          source: getErrorInfo({ 
-            title, 
-            price, 
-            description, 
-            thumbnail, 
-            code, 
-            stock, 
-            status,
-            category
-          }, 9),
+          source: getErrorInfo(
+            {
+              title,
+              price,
+              description,
+              thumbnail,
+              code,
+              stock,
+              status,
+              category,
+            },
+            9
+          ),
           message: "Datos incompletos o no validos",
           code: EErrors.BAD_REQUEST,
-        })
+        });
       }
 
       await productService.udpateProduct(pid, productUpdate);
+      req.logger.info(`Producto actualizado con exito`);
       return res.json({
         message: "Producto actualizado con exito",
         productUpdate,
@@ -117,6 +130,7 @@ class ProductController {
     try {
       await productService.getProductById(pid);
       await productService.deleteProduct(pid);
+      req.logger.info(`Producto eliminado con exito`);
       return res.json({ message: "Producto eliminado con exito" });
     } catch (error) {
       return res

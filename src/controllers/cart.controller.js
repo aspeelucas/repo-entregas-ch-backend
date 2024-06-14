@@ -6,9 +6,10 @@ class CartController {
   async getCarts(req, res) {
     try {
       const carts = await cartService.getCarts();
+      req.logger.info("Carritos obtenidos correctamente");
       return res.json(carts);
     } catch (error) {
-      console.error("Error al obtener los carritos", error);
+      req.logger.error("Error al obtener los carritos", error);
       return res.status(500).json({
         status: "error",
         error: "Error interno del servidor",
@@ -21,9 +22,10 @@ class CartController {
     const { cid } = req.params;
     try {
       const cart = await cartService.getCart(cid);
+      req.logger.info(`Carrito obtenido correctamente ${cart}`);
       return res.json(cart);
     } catch (error) {
-      console.error("Error al obtener el carrito", error);
+      req.logger.error("Error al obtener el carrito", error);
       return res.status(404).json({
         status: "error",
         error: "Carrito no encontrado",
@@ -38,12 +40,13 @@ class CartController {
     try {
       await cartService.addProductToCart(cid, pid, quantity);
       const updatedCart = await cartService.getCart(cid);
+      req.logger.info(`Producto agregado al carrito correctamente ${updatedCart}`);
       return res.json({
         message: "El producto fue agregado con exito",
         updatedCart,
       });
     } catch (error) {
-      console.error("Error al agregar producto al carrito", error);
+      req.logger.error("Error al agregar el producto al carrito", error);
       return res.status(500).json({
         status: "error",
         error: "Error interno del servidor",
@@ -61,9 +64,10 @@ class CartController {
         cid,
         updatedProducts
       );
+      req.logger.info(`Carrito actualizado correctamente ${updatedCart}`);
       return res.json(updatedCart);
     } catch (error) {
-      console.error("Error al actualizar el carrito", error);
+     req.logger.error("Error al actualizar el carrito", error);
       return res.status(500).json({
         status: "error",
         error: "Error interno del servidor",
@@ -77,13 +81,14 @@ class CartController {
     const { cid, pid } = req.params;
     try {
       const updatedCart = await cartService.deleteProductFromCart(cid, pid);
+      req.logger.info(`Producto eliminado del carrito correctamente `);
       return res.json({
         status: "success",
         message: "Producto eliminado del carrito correctamente",
         updatedCart,
       });
     } catch (error) {
-      console.error("Error al eliminar el producto del carrito", error);
+      req.logger.error("Error al eliminar el producto del carrito", error);
       return res.status(500).json({
         status: "error",
         error: "Error interno del servidor",
@@ -96,59 +101,70 @@ class CartController {
     const { cid } = req.params;
     try {
       await cartService.deleteAllProductsFromCart(cid);
+      req.logger.info(`Todos los productos fueron eliminados del carrito`);
       return res.json({
         status: "success",
         message: "Todos los productos fueron eliminados del carrito",
       });
     } catch (error) {
-      console.error("Error al eliminar todos los productos del carrito", error);
+      req.logger.error("Error al eliminar los productos del carrito", error);
       return res.status(500).json({
         status: "error",
         error: "Error interno del servidor",
       });
     }
   }
-    // Agrega un carrito
+  // Agrega un carrito
 
-    async addCart(req, res) {
-      const user = req.user.email;
-      try {
-        const cartId = await cartService.addCart(user);
-        return res.json({ message: "El carrito fue agregado con exito", cartId });
-      } catch (error) {
-        console.log("Error al agregar carrito", error);
-        return res.status(500).json({ error: "Error interno del servidor" });
-      }
+  async addCart(req, res) {
+    const user = req.user.email;
+    try {
+      const cartId = await cartService.addCart(user);
+      req.logger.info(`Carrito agregado con exito ${cartId}`);
+      return res.json({ message: "El carrito fue agregado con exito", cartId });
+    } catch (error) {
+      req.logger.error("Error al agregar el carrito", error);
+      return res.status(500).json({ error: "Error interno del servidor" });
     }
+  }
 
-    // Elimina un carrito
+  // Elimina un carrito
 
-    async deleteCart(req, res) {
-      const { cid } = req.params;
-      try {
-        await cartService.deleteCart(cid);
-        return res.json({ status: "success", message: "Carrito eliminado con exito" });
-      } catch (error) {
-        console.error("Error al eliminar el carrito", error);
-        return res.status(500).json({ status: "error", error: "Error interno del servidor" });
-      }
+  async deleteCart(req, res) {
+    const { cid } = req.params;
+    try {
+      await cartService.deleteCart(cid);
+      req.logger.info(`Carrito eliminado con exito`);
+      return res.json({
+        status: "success",
+        message: "Carrito eliminado con exito",
+      });
+    } catch (error) {
+      req.logger.error("Error al eliminar el carrito", error);
+      return res
+        .status(500)
+        .json({ status: "error", error: "Error interno del servidor" });
     }
+  }
 
   // Finalizar compra
 
   async finishPurchase(req, res) {
-
     const { cid } = req.params;
     try {
       await cartService.finishPurchase(cid);
-      return res.json({ status: "success", message: "Compra finalizada con exito" });
+      req.logger.info(`Compra finalizada con exito`);
+      return res.json({
+        status: "success",
+        message: "Compra finalizada con exito",
+      });
     } catch (error) {
-      console.error("Error al finalizar la compra", error);
-      return res.status(500).json({ status: "error", error: "Error interno del servidor" });
+      req.logger.error("Error al finalizar la compra", error);
+      return res
+        .status(500)
+        .json({ status: "error", error: "Error interno del servidor" });
     }
-
   }
-
 }
 
 export default CartController;

@@ -43,6 +43,7 @@ class TicketController {
       cart.products = productsNotAvailable;
 
       await cart.save();
+      req.logger.info(`Compra realizada correctamente ${newTicket}`);
       return res.json(newTicket);
     } catch (error) {
       res.status(400).send(`Error al realizar la compra :${error}`);
@@ -53,6 +54,7 @@ class TicketController {
     try {
       const { ticketId } = req.params;
       const tickets = await ticketService.getTicket(ticketId);
+      req.logger.info(`Ticket obtenido correctamente ${tickets}`);
       res.status(200).send(tickets);
     } catch (error) {
       res.status(400).send(`Error al obtener los tickets ${error}`);
