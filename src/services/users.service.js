@@ -16,6 +16,8 @@ class UsersService {
     async findUserByCartId(cartId){
         return await userModel.findOne({cart:cartId});
     }
+
+    
     
     // async deleteUser(_id) {
     //     return await userModel.findByIdAndDelete(_id);

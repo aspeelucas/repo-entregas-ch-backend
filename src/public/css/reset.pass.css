@@ -24,6 +24,10 @@
     
 }
 
+.containerTitle h1{
+    text-align: center;
+}
+
 form{
     display: flex;
     flex-direction: column;
@@ -68,14 +72,3 @@ label{
     font-weight: 600;
     margin-left: 2px;
 }
-.containerReset{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-

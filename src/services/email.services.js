@@ -12,7 +12,7 @@ class EmailService {
     });
   }
 
-  async sendEmail(user, code,amount,purchase_date,products) {
+  async sendEmail(user, code, amount, purchase_date, products) {
     try {
       await this.transporter.sendMail({
         from: "Ecommerce Top <aspeelucas@gmail.com>",
@@ -30,7 +30,30 @@ class EmailService {
         `,
       });
       console.log("Email enviado con exito");
-      
+    } catch (error) {
+      console.error("Error al enviar el email", error);
+    }
+  }
+
+  async sendEmailResetPassword(email, first_name, token) {
+    try {
+      const mailOptions = {
+        from: "Ecommerce Top <aspeelucas@gmail.com>",
+        to: email,
+        subject: "Restablecer contraseña",
+        html: `
+        <h1>Restablecer contraseña</h1>
+        <h2>Hola ${first_name}</h2>
+        <p>Recibimos una solicitud para restablecer tu contraseña</p>
+        <p>Tu token de restablecimiento es: ${token}</p>
+        <p>Este codigo expirara en 1 Hora</p>
+        <p>Para restablecer tu contraseña haz click en el siguiente enlace</p>
+        <a href="http://localhost:8080/change-password">Restablecer contraseña</a>
+        <p>Si no fuiste tu, ignora este mensaje</p>
+        `,
+      };
+      await this.transporter.sendMail(mailOptions);
+      console.log("Email enviado con exito");
     } catch (error) {
       console.error("Error al enviar el email", error);
     }

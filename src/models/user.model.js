@@ -26,13 +26,16 @@ const userSchema = new mongoose.Schema({
     },
     rol:{
         type: String,
-        enum: ['admin', 'user'],
+        enum: ['admin', 'user', 'premium'],
         default: 'user'
     },
     cart:{
         type: String, 
+    },
+    resetToken:{
+        token: String,
+        expiresAt: Date
     }
-
 });
 
 export const userModel = mongoose.model('users', userSchema);

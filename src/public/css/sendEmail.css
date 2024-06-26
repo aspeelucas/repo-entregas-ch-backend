@@ -21,17 +21,10 @@
     align-items: center;
     margin-top: 10px;
     font-weight: 700;
+    text-align: center;
     
 }
 
-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  
-    margin-top: 10px;
-}
 
 button{
     color: white;
@@ -64,18 +57,20 @@ a{
     --bs-btn-border-color: none;
     --bs-btn-hover-bg: #73d9ee;
 }
-label{
-    font-weight: 600;
-    margin-left: 2px;
-}
-.containerReset{
+
+.textInfoEmail{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
-    font-weight: 500;
-    margin-bottom: 10px;
+    color: black;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
 }
 
-
+.buttonReturn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}

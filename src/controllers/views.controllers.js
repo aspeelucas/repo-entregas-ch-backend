@@ -4,7 +4,6 @@ import TicketService from "../services/ticket.service.js";
 import UserDto from "../dto/user.dto.js";
 import { generateProducts } from "../utils/util.js";
 
-
 const productService = new ProductService();
 const cartService = new CartService();
 const ticketService = new TicketService();
@@ -37,7 +36,6 @@ class ViewsController {
       if (!products || page > products.totalPages || page < 1) {
         return res.render("productError", { fileCss: "productError.css" });
       }
-
 
       res.render("products", {
         status: "success",
@@ -75,7 +73,7 @@ class ViewsController {
 
   async chat(req, res) {
     try {
-      res.render("chat", { fileCss: "chat.css", user: req.user});
+      res.render("chat", { fileCss: "chat.css", user: req.user });
     } catch (error) {
       res.render("productError", { fileCss: "productError.css" });
       req.logger.error("Error al ingresar al chat", error);
@@ -139,10 +137,8 @@ class ViewsController {
       if (!findTicket) {
         return res.render("productError", { fileCss: "productError.css" });
       }
-      res.render("checkout", { fileCss: "checkout.css", ticket: findTicket });  
-    } catch (error) {
-      
-    }
+      res.render("checkout", { fileCss: "checkout.css", ticket: findTicket });
+    } catch (error) {}
   }
 
   async mockingProducts(req, res) {
@@ -157,6 +153,38 @@ class ViewsController {
       fileCss: "mock.css",
     });
   }
+
+  async resetPassword(req, res) {
+    res.render("passwordreset", { fileCss: "reset.pass.css" });
+  }
+
+  async changePassword(req, res) {
+    res.render("changePassword", { fileCss: "changePassword.css" });
+  }
+
+  async sendEmail(req, res) {
+    res.render("sendEmail", { fileCss: "sendEmail.css" });
+  }
+
+  async userNotFound(req, res) {
+    res.render("userNotFound", { fileCss: "sendEmail.css" });
+  }
+  async invalidToken(req, res) {
+    res.render("invalidToken", { fileCss: "sendEmail.css" });
+  }
+
+  async expiredToken(req, res) {
+    res.render("expiredToken", { fileCss: "sendEmail.css" });
+  }
+
+  async passRepeatError(req, res) {
+    res.render("passRepeatError", { fileCss: "sendEmail.css" });
+  }
+
+  async updatePassword(req, res) {
+    res.render("updatePassword", { fileCss: "sendEmail.css" });
+  }
+
 }
 
 export default ViewsController;

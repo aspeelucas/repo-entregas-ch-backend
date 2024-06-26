@@ -11,6 +11,10 @@ sessionsRouter.post("/register", usersController.registerUser);
 
 sessionsRouter.post("/login", usersController.loginUser);
 
+sessionsRouter.post("/requestPasswordReset",usersController.requestResetPassword);
+
+sessionsRouter.post("/reset-password",usersController.resetPassword)
+
 sessionsRouter.get(
   "/current",
   passportCall("jwt"),
