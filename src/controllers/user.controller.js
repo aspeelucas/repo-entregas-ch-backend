@@ -63,9 +63,9 @@ class UserController {
     try {
       const userExists = await usersService.findUser(email);
       if (!userExists) {
-        res.status(400).send("Usuario no encontrado");
+       return res.status(400).send("Usuario no encontrado");
       } else if (isValidPassword(password, userExists) === false) {
-        res.status(400).send("Credenciales invalidas");
+       return res.status(400).send("Credenciales invalidas");
       }
       const token = generateToken({
         email: userExists.email,
@@ -87,6 +87,25 @@ class UserController {
       res.status(400).send("Error al loguear usuario");
     }
   }
+  // Cambiar rol
+
+  async changeRolePremium(req, res) {
+    try {
+      const {uid} = req.params;
+      const user = await userModel.findById(uid);
+      if(!user){
+        return res.status(404).send("Usuario no encontrado")
+      }
+      const newRole = user.rol === "user" ? "premium" : "user";
+
+      const updatedUser = await userModel.findByIdAndUpdate(uid, {rol: newRole}, {new: true});
+      return res.status(200).send(updatedUser);
+      
+    } catch (error) {
+      console.error(error);
+      res.status(400).send("Error al cambiar rol")
+    }
+  };
 
   async currentUser(req, res) {
     res.send(req.user);

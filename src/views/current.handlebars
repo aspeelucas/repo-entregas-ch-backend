@@ -19,8 +19,12 @@
 
             <div class=" ms-auto w-0 navBarOpt ">
                 <div>
-                    <a class="navbar-brand" href="/products">Productos</a>
-                    <a class="navbar-brand" href="/products">Carrito</a>
+                    {{#if_eq userDto.role "premium"}}<a class="navbar-brand" href="/products">Productos</a>{{/if_eq}}
+                    {{#if_eq userDto.role "user"}}<a class="navbar-brand" href="/products">Productos</a>{{/if_eq}}
+                    {{#if_eq userDto.role "premium"}}<a class="navbar-brand" href="/carts/{{userDto.cart}}">Carrito</a>{{/if_eq}}
+                    {{#if_eq userDto.role "user"}}<a class="navbar-brand" href="/carts/{{userDto.cart}}">Carrito</a>{{/if_eq}}
+                    {{!-- <a class="navbar-brand" href="/products">Productos</a> --}}
+                    {{!-- <a class="navbar-brand" href="/products">Carrito</a> --}}
                     <a class="navbar-brand" href="/current">Perfil</a>
                 </div>
 
@@ -46,16 +50,15 @@
                 <h2>Email: {{userDto.email}}</h2>
                 <h3>Rol: {{userDto.role}}</h2>
                     <h2>Nombre completo: {{userDto.fullName}}</h2>
-                    <div class="optProfileButton">
-                        
-                        
-                       
+                    <div class="optProfileButton">  
                          {{#if_eq userDto.role "user"}} <a href="/chat" type="button" class="btn btn-primary">Chat<i class="bi bi-chat-dots"></i></a>{{/if_eq}}
                          {{#if_eq userDto.role "user"}}<a href="/products" type="button" class="btn btn-primary">Productos<i class="bi bi-bag"></i></a>{{/if_eq}}
                           {{#if_eq userDto.role "user"}}<a href="/carts/{{userDto.cart}}" type="button" class="btn btn-primary"> Carrito<i class="bi bi-cart-plus"></i></a>{{/if_eq}}
                            {{#if_eq userDto.role "admin"}}<a href="/realtimeproducts" type="button" class="btn btn-primary">Gestion<i class="bi bi-pencil"></i></a>{{/if_eq}}
-                        
-                        
+                            {{#if_eq userDto.role "premium"}}<a href="/panel-premium" type="button" class="btn btn-primary">Panel Premiun<i class="bi bi-pencil"></i></a>{{/if_eq}}
+                             {{#if_eq userDto.role "premium"}} <a href="/chat" type="button" class="btn btn-primary">Chat<i class="bi bi-chat-dots"></i></a>{{/if_eq}}
+                             {{#if_eq userDto.role "premium"}}<a href="/products" type="button" class="btn btn-primary">Productos<i class="bi bi-bag"></i></a>{{/if_eq}}
+                          {{#if_eq userDto.role "premium"}}<a href="/carts/{{userDto.cart}}" type="button" class="btn btn-primary"> Carrito<i class="bi bi-cart-plus"></i></a>{{/if_eq}}           
                     </div>
                     <div class="logoutButtonProfile">
                         <a href="/api/sessions/logout" type="button" class="btn btn-primary">Cerrar sesion<i class="bi bi-box-arrow-right"></i></a>

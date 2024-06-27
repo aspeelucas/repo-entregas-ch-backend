@@ -5,14 +5,24 @@ import { Server } from "socket.io";
 const productService = new ProductService();
 
 const productDefault = async (req,res) => {
-    
-  const products = await productService.getProducts();
+  const limit = 20;
+  const products = await productService.getProducts(limit);
   const productsFinal = products.docs.map((product) => {
     const { ...rest } = product.toObject();
     return rest;
   });
   return productsFinal;
 };
+
+// const productsOwner = async (req,res) => {
+//   const products = await productService.getProductsByOwner(req.user.email);
+//   const productsFinal = products.map((product) => {
+//     const { ...rest } = product.toObject();
+//     return rest;
+//   });
+//   return productsFinal;
+
+// }
 
 const socketController = (httpServer) => {
   const io = new Server(httpServer);
@@ -28,6 +38,9 @@ const socketController = (httpServer) => {
       const product = await productService.getProductById(_id);
       socket.emit("product", product);
     });
+    // Get all products by owner
+
+   
 
     // Add product
     socket.on("new-product", async (data) => {

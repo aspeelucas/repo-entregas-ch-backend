@@ -15,6 +15,10 @@ sessionsRouter.post("/requestPasswordReset",usersController.requestResetPassword
 
 sessionsRouter.post("/reset-password",usersController.resetPassword)
 
+sessionsRouter.post("/premium/:uid",usersController.changeRolePremium)
+
+
+
 sessionsRouter.get(
   "/current",
   passportCall("jwt"),

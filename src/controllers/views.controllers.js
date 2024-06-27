@@ -71,6 +71,17 @@ class ViewsController {
     }
   }
 
+  async panelPremium(req, res) {
+    try {
+      res.render("panelPremium", { fileCss: "panelPremium.css", user: req.user });
+    } catch (error) {
+      res.render("productError", { fileCss: "productError.css" });
+      req.logger.error("Error al ingresar al panel premium", error);
+
+  }
+
+}
+
   async chat(req, res) {
     try {
       res.render("chat", { fileCss: "chat.css", user: req.user });

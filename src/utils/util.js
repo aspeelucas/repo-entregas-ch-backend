@@ -28,6 +28,15 @@ const authorization = (role) => {
   };
 };
 
+const authorizationUsers = (role) => {
+  return async (req, res, next) => {
+    if (req.user.rol == role || req.user.rol == "admin") {
+      return res.status(403).send({ error: "No tienes permisos suficientes" });
+    }
+    next();
+  };
+};
+
 const unauthorizedRoute = () => {
   return function (req, res, next) {
     passport.authenticate("jwt", function (error, user) {
@@ -105,4 +114,4 @@ const generateProducts = () => {
 
 
 
-export { passportCall, authorization ,unauthorizedRoute, unauthorizedRouteRedirectLogin,handleBarsSet,codeGenerator,generateProducts};
+export { passportCall, authorization ,unauthorizedRoute, unauthorizedRouteRedirectLogin,handleBarsSet,codeGenerator,generateProducts,authorizationUsers};

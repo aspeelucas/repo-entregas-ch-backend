@@ -12,9 +12,10 @@ class ProductService {
     stock,
     category,
     thumbnails,
+    owner,
   }) {
     try {
-      if (!title || !description || !price || !code || !stock || !category) {
+      if (!title || !description || !price || !code || !stock || !category ) {
         throw CustomError.createError({
           name:"Todos los campos son obligatorios",
           source:getErrorInfo({title,description,price,code,stock,category},2),
@@ -45,6 +46,7 @@ class ProductService {
         category,
         status: true,
         thumbnails: thumbnails || [],
+        owner: owner || "admin",
       });
 
       const product = await newProduct.save();
@@ -72,6 +74,16 @@ class ProductService {
           code:EErrors.NOT_FOUND
         })
       }
+      return products;
+    } catch (error) {
+      console.log("Error al obtener productos", error);
+      throw error;
+    }
+  }
+
+  async getProductsByOwner(owner) {
+    try {
+      const products = await productModel.find({ owner });
       return products;
     } catch (error) {
       console.log("Error al obtener productos", error);

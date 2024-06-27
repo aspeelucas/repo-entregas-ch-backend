@@ -138,6 +138,20 @@ class ProductController {
         .json({ error: "Error interno del servidor", reason: error.message });
     }
   }
+
+  async getProductsByOwner(req, res) {
+    const { owner } = req.params;
+    try {
+      const products = await productService.getProductsByOwner(owner);
+      req.logger.info(`Productos obtenidos correctamente`);
+      return res.json(products);
+    } catch (error) {
+      req.logger.error("Error al obtener los productos", error);
+      return res
+        .status(500)
+        .json({ error: "Error interno del servidor", reason: error.message });
+    }
+  }
 }
 
 export default ProductController;

@@ -15,6 +15,7 @@ socket.on("allProducts", (data) => {
         <p>Stock : ${product.stock} </p>
         <p>Status : ${product.status} </p>
         <p>Id : ${product._id}</p>
+        <p>Owner : ${product.owner}</p>
         <button onclick=" 
         socket.emit('delete-product', '${product._id}')
         ">Eliminar</button>
@@ -32,6 +33,39 @@ socket.on("allProducts", (data) => {
   });
 });
 
+// socket.on("products-owner", (data) => {
+//   const listaInRealTimee = document.getElementById("inRealTimeee");
+//   listaInRealTime.innerHTML = "";
+
+//   data.forEach((product) => {
+//     listaInRealTimee.innerHTML += `
+//         <div class="cardProd">
+//         <h3> ${product.title} </h3>
+//         <p>Descripcion : ${product.description} </p>
+//         <p>Precio: ${product.price} </p>
+//         <img src="${product.thumbnail}" alt="imagen del producto" width="100px" height="100px">
+//         <p>Code: ${product.code} </p>
+//         <p>Stock : ${product.stock} </p>
+//         <p>Status : ${product.status} </p>
+//         <p>Id : ${product._id}</p>
+//         <p>Owner : ${product.owner}</p>
+//         <button onclick=" 
+//         socket.emit('delete-product', '${product._id}')
+//         ">Eliminar</button>
+
+
+//         <button  onclick=" 
+//         socket.emit('get-product', '${product._id}')
+//         "
+//         class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+//         >Ver</button>  
+
+// </div>
+
+//   `;
+//   });
+// });
+
 const form = document.querySelector("form");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -46,6 +80,7 @@ form.addEventListener("submit", (event) => {
     code: Number(dataForm.get("code")),
     stock: Number(dataForm.get("stock")),
     status: dataForm.get("status") == "on" ? true : false,
+    owner: dataForm.get("owner"),
   };
 
   socket.emit("new-product", post);
@@ -96,6 +131,10 @@ socket.on("product", (data) => {
 <label for="exampleInputEmail1" class="form-label">Id</label>
 <input required type="text" disabled  name="id" class="form-control" id="exampleInputEmail1" value= "${data._id}" aria-describedby="emailHelp">
 </div>
+<div class="mb-3">
+<label for="exampleInputEmail1" class="form-label">Owner</label>
+<input required type="text" disabled  name="owner" class="form-control" id="exampleInputEmail1" value= "${data.owner}" aria-describedby="emailHelp">
+</div>
 
 
   <div class="mb-3 form-check">
@@ -111,6 +150,7 @@ socket.on("product", (data) => {
       event.preventDefault();
       const dataForm = new FormData(updateForm);
       const id = event.target.id.value;
+      const owner = event.target.owner.value;
       const post = {
         title: dataForm.get("title"),
         price: Number(dataForm.get("price")),
@@ -120,6 +160,7 @@ socket.on("product", (data) => {
         code: Number(dataForm.get("code")),
         stock: Number(dataForm.get("stock")),
         status: dataForm.get("status") == "on" ? true : false,
+        owner: owner,
       };
     
       socket.emit("update-product",{id,data:post});

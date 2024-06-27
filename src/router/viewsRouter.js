@@ -3,6 +3,7 @@ import passport from "passport";
 import {
   authorization,
   unauthorizedRoute,
+  authorizationUsers,
   unauthorizedRouteRedirectLogin,
   generateProducts,
 } from "../utils/util.js";
@@ -22,7 +23,11 @@ viewRouter.get(
   authorization("admin"),
   viewsController.getRealTimeProducts
 );
-
+viewRouter.get(
+  "/panel-premium",
+  passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  viewsController.panelPremium
+);
 viewRouter.get(
   "/chat",
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
@@ -33,13 +38,14 @@ viewRouter.get(
 viewRouter.get(
   "/products",
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-  authorization("user"),
+  authorizationUsers("admin"),
   viewsController.getProducts
 );
 
 viewRouter.get(
   "/carts/:cid",
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  authorizationUsers("admin"),
   viewsController.getCart
 );
 
@@ -64,7 +70,7 @@ viewRouter.get(
 
 // Rutas Mock
 
-viewRouter.get("/mockingproducts",viewsController.mockingProducts);
+viewRouter.get("/mockingproducts", viewsController.mockingProducts);
 
 // Rutas restablecer contraseña
 

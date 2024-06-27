@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
@@ -10,6 +11,10 @@ const productSchema = new mongoose.Schema({
   code: { type: Number, required: true , unique: true},
   stock: { type: Number, required: true },
   status: { type: Boolean, required: true },
+  owner:{  type: String,
+    required: true,
+    default: "admin"
+   },
 });
 productSchema.plugin(mongoosePaginate);
 

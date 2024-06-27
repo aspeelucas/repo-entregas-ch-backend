@@ -43,7 +43,7 @@
   <body>
     <div>
       <div>
-        <h1>Productos en tiempo Real</h1>
+        <h1>Panel de gestion Premium</h1>
       </div>
       <h2>Agregar Producto</h2>
       <div class="formSyle">
@@ -97,20 +97,13 @@
               id="stockId"
               placeholder="Stock"
             />
-             {{#if_eq user.rol "premium"}}  <input
+             <input
               type="text"
               name="owner"
               id="ownerId"
               placeholder="Owner"
               value="{{user.email}}"
-            />{{/if_eq}}
-             {{!-- <input
-              type="text"
-              name="owner"
-              id="ownerId"
-              placeholder="Owner"
-              value="{{user.email}}"
-            /> --}}
+            />
             <input type="checkbox" name="status" id="statusId" /><label
               for="status"
             >Estado</label>
@@ -122,8 +115,8 @@
       </div>
 
       <div>
-        <h4>Lista de Productos en Tiempo Real</h4>
-        <div id="inRealTime"> </div>
+        <h4>Lista de Productos Creados por {{user.email}}</h4>
+        <div id="inRealTimeee"> </div>
         {{! <div id="modal"></div> }}
 
         {{! MODALL }}
