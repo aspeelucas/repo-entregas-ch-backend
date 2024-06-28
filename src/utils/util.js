@@ -1,6 +1,8 @@
 import passport from "passport";
 import Handlebars from "handlebars";
 import { faker } from "@faker-js/faker";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUiExpress from "swagger-ui-express";
 
 const passportCall = (strategy) => {
   return async (req, res, next) => {
@@ -55,12 +57,11 @@ const unauthorizedRouteRedirectLogin = () => {
         return res.redirect("/login");
       }
       next();
-    })
-    (req, res, next);
+    })(req, res, next);
   };
 };
 
-const handleBarsSet= ()=>{
+const handleBarsSet = () => {
   Handlebars.registerHelper("if_eq", function (a, b, opts) {
     if (a === b) {
       return opts.fn(this);
@@ -68,32 +69,29 @@ const handleBarsSet= ()=>{
       return opts.inverse(this);
     }
   });
-  
+
   Handlebars.registerHelper("getUpdatedQuery", function (a, b, opts) {
     const result = Object.entries(a)
       .map((query) => {
         if (query[0].includes(b)) {
           return "";
         }
-  
+
         return query.join("=");
       })
       .join("&");
-  
+
     return result;
   });
 
   Handlebars.registerHelper("multiply", function (a, b) {
     return a * b;
   });
-
-}
-
+};
 
 const codeGenerator = () => {
   return new Date().getTime().toString(36).slice(-5);
-}
-
+};
 
 // Faker Mock
 
@@ -111,7 +109,31 @@ const generateProducts = () => {
   };
 };
 
+// swagger configuration
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.1",
+    info: {
+      title: "Documentacion sobre top e-commerce",
+      description: "Documentacion de la API de top e-commerce",
+    },
+  },
+  apis: ["./src/docs/**/*.yaml"],
+};
+
+const specs = swaggerJSDoc(swaggerOptions);
 
 
 
-export { passportCall, authorization ,unauthorizedRoute, unauthorizedRouteRedirectLogin,handleBarsSet,codeGenerator,generateProducts,authorizationUsers};
+export {
+  passportCall,
+  authorization,
+  unauthorizedRoute,
+  unauthorizedRouteRedirectLogin,
+  handleBarsSet,
+  codeGenerator,
+  generateProducts,
+  authorizationUsers,
+  specs,
+};

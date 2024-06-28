@@ -10,9 +10,11 @@ import passport from "passport";
 import cookieParser from "cookie-parser";
 import initializePassport from "./config/passport.config.js";
 import socketController from "./controllers/socket.io.controller.js";
-import { handleBarsSet } from "./utils/util.js";
+import { handleBarsSet,specs } from "./utils/util.js";
 import compression from "express-compression";
 import addLogger from "./utils/logger.js";
+import swaggerUiExpress from "swagger-ui-express";
+
 
 const app = express();
 const PORT = 8080;
@@ -27,6 +29,7 @@ app.use(express.static("./src/public"));
 app.use(compression());
 app.use(addLogger);
 
+
 // passport
 app.use(passport.initialize());
 initializePassport();
@@ -38,9 +41,8 @@ app.use("/api/cart", cartRouter);
 app.use("/api/sessions", sessionsRouter);
 app.use("/loggertest", loggerRouter);
 app.use("/", viewRouter);
-
-
-
+// Swagger
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 // Socket.io
 socketController(httpServer);
