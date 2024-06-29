@@ -2,6 +2,9 @@ import { cartModel } from "../models/cart.model.js";
 import { getErrorInfo } from "./errors/info.js";
 import CustomError from "./errors/custom-error.js";
 import { EErrors } from "./errors/enum.js";
+import ProductService from "./products.service.js";
+
+const productService = new ProductService();
 
 class CartService {
   async addCart(user) {
@@ -25,10 +28,21 @@ class CartService {
 
   async addProductToCart(id, productId, quantity = 1) {
     try {
+      const product = await productService.getProductById(productId);
       const cart = await this.getCart(id);
       const productExist = cart.products.find(
         (item) => item.product._id.toString() === productId
       );
+
+      console.log(productExist);
+      if (product.owner === cart.user) {
+        throw CustomError.createError({
+          name: "No puedes agregar tu propio producto al carrito",
+          source: getErrorInfo({ id: productId }, 7),
+          message: "Error al agregar el producto al carrito",
+          code: EErrors.NOT_FOUND,
+        });
+      }
 
       if (productExist) {
         productExist.quantity += quantity;

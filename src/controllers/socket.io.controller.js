@@ -4,7 +4,7 @@ import { Server } from "socket.io";
 
 const productService = new ProductService();
 
-const productDefault = async (req,res) => {
+const productDefault = async (req, res) => {
   const limit = 20;
   const products = await productService.getProducts(limit);
   const productsFinal = products.docs.map((product) => {
@@ -14,15 +14,14 @@ const productDefault = async (req,res) => {
   return productsFinal;
 };
 
-// const productsOwner = async (req,res) => {
-//   const products = await productService.getProductsByOwner(req.user.email);
-//   const productsFinal = products.map((product) => {
-//     const { ...rest } = product.toObject();
-//     return rest;
-//   });
+// const productsOwner = async (email) => {
+//   const products = await productService.getProductsByOwner(email.email);
+//       const productsFinal = products.map((product) => {
+//         const { ...rest } = product.toObject();
+//         return rest;
+//       });
 //   return productsFinal;
-
-// }
+// };
 
 const socketController = (httpServer) => {
   const io = new Server(httpServer);
@@ -38,9 +37,17 @@ const socketController = (httpServer) => {
       const product = await productService.getProductById(_id);
       socket.emit("product", product);
     });
-    // Get all products by owner
-
    
+
+    socket.on("ownerPro", async (email) => {
+      const products = await productService.getProductsByOwner(email.email);
+      const productsFinal = products.map((product) => {
+        const { ...rest } = product.toObject();
+        return rest;
+      });
+
+      socket.emit("allProductsOwner", productsFinal);
+    });
 
     // Add product
     socket.on("new-product", async (data) => {
@@ -59,14 +66,14 @@ const socketController = (httpServer) => {
     });
 
     // Update product
-    socket.on("update-product", async ({id,data}) => {
+    socket.on("update-product", async ({ id, data }) => {
       data.price = Number(data.price);
       data.code = Number(data.code);
       data.stock = Number(data.stock);
-      console.log(data,id);
+      console.log(data, id);
 
       try {
-        await productService.udpateProduct(id,data);
+        await productService.udpateProduct(id, data);
         socket.emit("allProducts", await productDefault());
       } catch (error) {
         console.error("Error al actualizar producto", error);
@@ -80,6 +87,41 @@ const socketController = (httpServer) => {
         socket.emit("allProducts", await productDefault());
       } catch (error) {
         console.error("Error al eliminar producto", error);
+      }
+    });
+
+    // Delete owner products
+    socket.on("delete-owner-products", async ({_id,email}) => {
+      try {
+        await productService.deleteProduct(_id);
+        const products = await productService.getProductsByOwner(email);
+        const productsFinal = products.map((product) => {
+          const { ...rest } = product.toObject();
+          return rest;
+        });
+        socket.emit("allProductsOwner", productsFinal);
+      } catch (error) {
+        console.error("Error al eliminar producto", error);
+      }
+    });
+
+    // Update owner products
+    socket.on("update-product", async ({ id, data }) => {
+      data.price = Number(data.price);
+      data.code = Number(data.code);
+      data.stock = Number(data.stock);
+      console.log(data, id);
+
+      try {
+        await productService.udpateProduct(id, data);
+        const products = await productService.getProductsByOwner(data.owner);
+        const productsFinal = products.map((product) => {
+          const { ...rest } = product.toObject();
+          return rest;
+        });
+        socket.emit("allProductsOwner", productsFinal);
+      } catch (error) {
+        console.error("Error al actualizar producto", error);
       }
     });
 

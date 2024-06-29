@@ -1,5 +1,4 @@
-const addCart = async (idCart,idProduct) => {
-
+const addCart = async (idCart, idProduct) => {
   try {
     const response = await fetch(`/api/cart/${idCart}/product/${idProduct}`, {
       method: "POST",
@@ -7,17 +6,20 @@ const addCart = async (idCart,idProduct) => {
         "Content-Type": "application/json",
       },
     });
+    console.log(response.status);
     const data = await response.json();
-    alert("Producto agregado correctamente");
+    if (response.ok) {
+      alert("Producto agregado correctamente");
+    } else {
+      alert("Error al agregar el producto");
+    }
     return data;
   } catch (error) {
     console.log(error);
   }
 };
 
-
-
-const deleteProduct = async (idCart,idProduct) => {
+const deleteProduct = async (idCart, idProduct) => {
   try {
     const response = await fetch(`/api/cart/${idCart}/product/${idProduct}`, {
       method: "DELETE",
@@ -32,7 +34,6 @@ const deleteProduct = async (idCart,idProduct) => {
   } catch (error) {
     console.log(error);
   }
-  
 };
 
 const deleteAllProducts = async (idCart) => {

@@ -1,4 +1,7 @@
 const socket = io();
+socket.on("connection", () => {
+  console.log("conectado al servidor");
+});
 
 socket.on("allProducts", (data) => {
   const listaInRealTime = document.getElementById("inRealTime");
@@ -33,38 +36,46 @@ socket.on("allProducts", (data) => {
   });
 });
 
-// socket.on("products-owner", (data) => {
-//   const listaInRealTimee = document.getElementById("inRealTimeee");
-//   listaInRealTime.innerHTML = "";
+socket.on("allProductsOwner", (data) => {
+  const listaInRealTimee = document.getElementById("inRealTimeee");
+  listaInRealTimee.innerHTML = "";
 
-//   data.forEach((product) => {
-//     listaInRealTimee.innerHTML += `
-//         <div class="cardProd">
-//         <h3> ${product.title} </h3>
-//         <p>Descripcion : ${product.description} </p>
-//         <p>Precio: ${product.price} </p>
-//         <img src="${product.thumbnail}" alt="imagen del producto" width="100px" height="100px">
-//         <p>Code: ${product.code} </p>
-//         <p>Stock : ${product.stock} </p>
-//         <p>Status : ${product.status} </p>
-//         <p>Id : ${product._id}</p>
-//         <p>Owner : ${product.owner}</p>
-//         <button onclick=" 
-//         socket.emit('delete-product', '${product._id}')
-//         ">Eliminar</button>
+  data.forEach((product) => {
+    listaInRealTimee.innerHTML += `
+        <div class="cardProd">
+        <h3> ${product.title} </h3>
+        <p>Descripcion : ${product.description} </p>
+        <p>Precio: ${product.price} </p>
+        <img src="${product.thumbnail}" alt="imagen del producto" width="100px" height="100px">
+        <p>Code: ${product.code} </p>
+        <p>Stock : ${product.stock} </p>
+        <p>Status : ${product.status} </p>
+        <p>Id : ${product._id}</p>
+        <p>Owner : ${product.owner}</p>
+        <button onclick=" 
+        socket.emit('delete-owner-products',{_id: '${product._id}', email: '${product.owner}'})
+        ">Eliminar</button>
 
 
-//         <button  onclick=" 
-//         socket.emit('get-product', '${product._id}')
-//         "
-//         class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-//         >Ver</button>  
+        <button  onclick=" 
+        socket.emit('get-product', '${product._id}')
+        "
+        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        >Ver</button>  
 
-// </div>
+</div>
 
-//   `;
-//   });
-// });
+  `;
+  });
+});
+
+getProductsByOwner = (email) =>{
+  socket.emit("ownerPro",{email});
+}
+
+
+
+
 
 const form = document.querySelector("form");
 form.addEventListener("submit", (event) => {
@@ -141,7 +152,7 @@ socket.on("product", (data) => {
     <input required type="checkbox" name="status" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Estado</label>
   </div>
-  <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
 </form>
   </div>
     `

@@ -15,6 +15,6 @@ productsRouter.put("/:pid", productController.updateProduct);
 
 productsRouter.delete("/:pid", productController.deleteProduct);
 
-// productsRouter.get("/owner/:owner", productController.getProductsByOwner);
+productsRouter.get("/owner/:owner", productController.getProductsByOwner);
 
 

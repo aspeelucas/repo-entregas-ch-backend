@@ -40,7 +40,7 @@
         </div>
     </div>
 </nav>
-  <body>
+  <body >
     <div>
       <div>
         <h1>Panel de gestion Premium</h1>
@@ -116,6 +116,11 @@
 
       <div>
         <h4>Lista de Productos Creados por {{user.email}}</h4>
+        <button
+          onclick="getProductsByOwner('{{user.email}}')"
+          type="button"
+          class="btn btn-primary"
+          >Ver productos</button>
         <div id="inRealTimeee"> </div>
         {{! <div id="modal"></div> }}
 
