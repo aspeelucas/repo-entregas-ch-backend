@@ -1,9 +1,9 @@
 import { userModel } from "../models/user.model.js";
 
 class UsersService {
-    // async getUsers() {
-    //     return await userModel.find({});
-    // }
+    async getUsers() {
+        return await userModel.find({});
+    }
     
     async addUser(user) {
         return await userModel.create(user);
@@ -15,13 +15,13 @@ class UsersService {
 
     async findUserByCartId(cartId){
         return await userModel.findOne({cart:cartId});
-    }
+    } 
 
+    async deleteUser(email){
+        return await userModel.findOneAndDelete({email});
+    }
     
     
-    // async deleteUser(_id) {
-    //     return await userModel.findByIdAndDelete(_id);
-    // }
 }
 
 export default UsersService;

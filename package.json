@@ -6,12 +6,16 @@
   "type": "module",
   "scripts": {
     "start": "node src/app.js --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-users": "mocha test/sessions.test.js",
+    "test-products": "mocha test/products.test.js",
+    "test-carts": "mocha test/carts.test.js",
     "dev": "nodemon src/app.js --mode development"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.6.0",
     "nodemon": "^3.0.3"
   },
   "dependencies": {
