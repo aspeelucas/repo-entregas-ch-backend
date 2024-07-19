@@ -6,6 +6,7 @@ class UserDto {
         this.role = user.rol;
         this.fullName = `${user.first_name} ${user.last_name}` ;
         this.cart = user.cart;
+        this.id = user.id;
     }
 }
 

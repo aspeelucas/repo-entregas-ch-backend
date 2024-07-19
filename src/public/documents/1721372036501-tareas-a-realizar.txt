@@ -1,0 +1,7 @@
+TAREAS A REALIZAR TERCERA PRE ENTREGA
+
+
+-No dejar agregar productos sin stock al carrito
+-Agregar contador al carrito
+-Revisar la recarga al  vaciar el carrito, no aparece la notificacion
+-Revisar estilos de checkout

@@ -23,11 +23,8 @@
                     {{#if_eq userDto.role "user"}}<a class="navbar-brand" href="/products">Productos</a>{{/if_eq}}
                     {{#if_eq userDto.role "premium"}}<a class="navbar-brand" href="/carts/{{userDto.cart}}">Carrito</a>{{/if_eq}}
                     {{#if_eq userDto.role "user"}}<a class="navbar-brand" href="/carts/{{userDto.cart}}">Carrito</a>{{/if_eq}}
-                    {{!-- <a class="navbar-brand" href="/products">Productos</a> --}}
-                    {{!-- <a class="navbar-brand" href="/products">Carrito</a> --}}
                     <a class="navbar-brand" href="/current">Perfil</a>
                 </div>
-
                 <div class="containerLogOut">
                     <p class="textoRol">Bienvenido : {{userDto.email}} </p>
                     <div class="infoUserNav">
@@ -57,15 +54,26 @@
                            {{#if_eq userDto.role "admin"}}<a href="/realtimeproducts" type="button" class="btn btn-primary">Gestion<i class="bi bi-pencil"></i></a>{{/if_eq}}
                             {{#if_eq userDto.role "premium"}}<a href="/panel-premium" type="button" class="btn btn-primary">Panel Premiun<i class="bi bi-pencil"></i></a>{{/if_eq}}
                              {{#if_eq userDto.role "premium"}} <a href="/chat" type="button" class="btn btn-primary">Chat<i class="bi bi-chat-dots"></i></a>{{/if_eq}}
-                             {{#if_eq userDto.role "premium"}}<a href="/products" type="button" class="btn btn-primary">Productos<i class="bi bi-bag"></i></a>{{/if_eq}}
+                             {{#if_eq userDto.role "premium"}}<a href="/products" type="button" class="btn btn-primary ">Productos<i class="bi bi-bag"></i></a>{{/if_eq}}
+                              {{#if_eq userDto.role "user"}} <a href="/premium-documents"  type="button" class="btn btn-primary btnWidth">Documentacion<i class="bi bi-chat-dots"></i></a>{{/if_eq}}
                           {{#if_eq userDto.role "premium"}}<a href="/carts/{{userDto.cart}}" type="button" class="btn btn-primary"> Carrito<i class="bi bi-cart-plus"></i></a>{{/if_eq}}           
                     </div>
+                     {{#if_eq userDto.role "user"}} <div  class="logoutButtonProfile">
+                        <p class="changeRole">Te gustaria vender tus productos ? Hazte Premium y comienza ya!.</p>
+                        <a onclick="changeRole('{{userDto.id}}')" type="button" class="btn btn-primary">Premium<i class="bi bi-award-fill"></i></a>
+                    </div>{{/if_eq}}
+                   {{#if_eq userDto.role "premium"}}<div  class="logoutButtonProfile">
+                        <p class="changeRole">Regresa tu cuenta a usuario comun</p>
+                        <p class="warningText">Atencion!. Si realizas esta accion ya no podras vender tus productos</p>
+                        <a onclick="changeRole('{{userDto.id}}')" type="button" class="btn btn-primary">Convertir en Usuario<i class="bi bi-person-circle"></i></a>
+                    </div>{{/if_eq}}
                     <div class="logoutButtonProfile">
                         <a href="/api/sessions/logout" type="button" class="btn btn-primary">Cerrar sesion<i class="bi bi-box-arrow-right"></i></a>
-
                     </div>
         </div>
     </div>
+
+    <script src="/js/change.role.js"></script>
 </body>
 
 </html>

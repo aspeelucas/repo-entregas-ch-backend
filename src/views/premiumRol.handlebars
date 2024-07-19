@@ -1,0 +1,120 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/{{fileCss}}" />
+  </head>
+  <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/products">Ecommerce</a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div
+        class="collapse navbar-collapse menuCollap"
+        id="navbarSupportedContent"
+      >
+
+        <div class="ms-auto w-0 navBarOpt">
+          <div>
+            {{#if_eq userDto.role "premium"}}<a
+                class="navbar-brand"
+                href="/products"
+              >Productos</a>{{/if_eq}}
+            {{#if_eq userDto.role "user"}}<a
+                class="navbar-brand"
+                href="/products"
+              >Productos</a>{{/if_eq}}
+            {{#if_eq userDto.role "premium"}}<a
+                class="navbar-brand"
+                href="/carts/{{userDto.cart}}"
+              >Carrito</a>{{/if_eq}}
+            {{#if_eq userDto.role "user"}}<a
+                class="navbar-brand"
+                href="/carts/{{userDto.cart}}"
+              >Carrito</a>{{/if_eq}}
+            <a class="navbar-brand" href="/current">Perfil</a>
+          </div>
+
+          <div class="containerLogOut">
+            <p class="textoRol">Bienvenido : {{userDto.email}} </p>
+            <div class="infoUserNav">
+              <p class="textoRol">Rol :<i class="bi bi-person-fill"></i>
+                {{userDto.role}}
+              </p>
+              <a
+                href="/api/sessions/logout"
+                type="button"
+                class="btn btn-dark buttonLogOut"
+              >Cerrar Sesion <i class="bi bi-box-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <body>
+
+    <div class="containerFather">
+      <div class="containerProfile">
+        <h1>Documentacion para acceder al Premium</h1>
+        <p>Para acceder al rol de premium es necesario que subas los siguientes
+          documentos</p>
+        <form data-user-id="{{userDto.id}}">
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Identificacion (agrega
+              cualquier achivo .txt, este campo es de prueba)</label>
+            <input
+              required
+              class="form-control"
+              name="identificacion"
+              type="file"
+              id="formFile"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Direccion (agrega cualquier
+              achivo .txt, este campo es de prueba)</label>
+            <input
+              required
+              class="form-control"
+              type="file"
+              name="address"
+              id="formFile"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Estado de cuenta (agrega
+              cualquier achivo .txt, este campo es de prueba)</label>
+            <input
+              required
+              class="form-control"
+              name="account"
+              type="file"
+              id="formFile"
+            />
+          </div>
+          <div class="submitDocuments">
+          <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="/js/sendDocuments.js"></script>
+  </body>
+
+</html>

@@ -101,12 +101,12 @@ class CartController {
   async deleteAllProductsFromCart(req, res) {
     const { cid } = req.params;
     try {
-      await cartService.deleteAllProductsFromCart(cid);
-      req.logger.info(`Todos los productos fueron eliminados del carrito`);
-      return res.json({
-        status: "success",
-        message: "Todos los productos fueron eliminados del carrito",
-      });
+        await cartService.deleteAllProductsFromCart(cid);
+        req.logger.info(`Todos los productos fueron eliminados del carrito`);
+        return res.json({
+          status: "success",
+          message: "Todos los productos fueron eliminados del carrito",
+        });
     } catch (error) {
       req.logger.error("Error al eliminar los productos del carrito", error);
       return res.status(500).json({

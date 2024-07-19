@@ -52,7 +52,6 @@ viewRouter.get(
 viewRouter.get(
   "/checkout/:cid",
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-  authorization("user"),
   viewsController.checkout
 );
 
@@ -82,3 +81,11 @@ viewRouter.get("/invalid-token", viewsController.invalidToken);
 viewRouter.get("/expired-token", viewsController.expiredToken);
 viewRouter.get("/password-repeat-error", viewsController.passRepeatError);
 viewRouter.get("/update-password", viewsController.updatePassword);
+
+// Ruta para agregar rol premium
+
+viewRouter.get(
+  "/premium-documents",
+  passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  viewsController.premiumDocuments
+);

@@ -47,8 +47,23 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   margin-top: 30px;
+}
+
+.changeRole {
+  font-size: 20px;
+  color: #5a5a5a;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.warningText {
+  color: red;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 :root {
@@ -68,54 +83,51 @@
   --bs-btn-color: #333;
   --bs-btn-hover-bg: rgba(161, 206, 209, 0.555);
   font-weight: 600;
+  width: 150px;
 }
-
 
 /* navbar */
 
-
-.menuCollap{
+.menuCollap {
   display: flex;
   justify-content: start;
   align-items: start;
 }
 
 .menuCollap p {
-
   color: white;
   text-align: center;
 }
 
-.menuCollap i{
+.menuCollap i {
   text-decoration: none;
   color: white;
   font-size: 15px;
 }
 
-.containerLogOut{
+.containerLogOut {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
 }
 
-.textoRol{
+.textoRol {
   margin: 0px;
 }
 
-.buttonLogOut{
+.buttonLogOut {
   font-size: 14px;
- 
 }
 
-.navBarOpt{
+.navBarOpt {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
 }
 
-.infoUserNav{
+.infoUserNav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -123,7 +135,7 @@
   width: 100%;
 }
 
-.optProfileButton{
+.optProfileButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,6 +143,6 @@
   margin-top: 30px;
 }
 
-.optProfileButton a{
- width: 118.33px;
+.optProfileButton a {
+  width: 200px;
 }

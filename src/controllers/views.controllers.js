@@ -3,10 +3,12 @@ import CartService from "../services/carts.service.js";
 import TicketService from "../services/ticket.service.js";
 import UserDto from "../dto/user.dto.js";
 import { generateProducts } from "../utils/util.js";
+import UsersService from "../services/users.service.js";
 
 const productService = new ProductService();
 const cartService = new CartService();
 const ticketService = new TicketService();
+const usersService = new UsersService();
 
 class ViewsController {
   async getProducts(req, res) {
@@ -130,7 +132,10 @@ class ViewsController {
       if (!user) {
         return res.redirect("/login");
       }
-      const userDto = new UserDto(user);
+
+      const updatedUser = await usersService.findUser(user.email);
+
+      const userDto = new UserDto(updatedUser);
       res.render("current", { fileCss: "profile.css", userDto });
     } catch (error) {
       req.logger.error("Error al obtener el usuario", error);
@@ -194,6 +199,25 @@ class ViewsController {
 
   async updatePassword(req, res) {
     res.render("updatePassword", { fileCss: "sendEmail.css" });
+  }
+
+  async premiumDocuments(req, res) {
+
+    try {
+      const user = req.user;
+      if (!user) {
+        return res.redirect("/login");
+      }
+      const userDto = new UserDto(user);
+
+      res.render("premiumRol", { fileCss: "documentsPremium.css" , userDto});
+      
+    } catch (error) {
+      req.logger.error("Error al obtener los documentos premium", error);
+      res.render("productError", { fileCss: "productError.css" });
+      
+    }
+   
   }
 
 }
