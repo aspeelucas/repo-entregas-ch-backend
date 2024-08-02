@@ -26,12 +26,13 @@ viewRouter.get(
 viewRouter.get(
   "/panel-premium",
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  authorization("premium"),
   viewsController.panelPremium
 );
 viewRouter.get(
   "/chat",
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-  authorization("user"),
+  authorizationUsers("admin"),
   viewsController.chat
 );
 
@@ -41,6 +42,7 @@ viewRouter.get(
   authorizationUsers("admin"),
   viewsController.getProducts
 );
+
 
 viewRouter.get(
   "/carts/:cid",
@@ -54,6 +56,8 @@ viewRouter.get(
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
   viewsController.checkout
 );
+
+viewRouter.get("/users-list", passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),authorization("admin"), viewsController.usersList);
 
 // Rutas de autenticación
 

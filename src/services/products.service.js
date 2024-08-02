@@ -2,7 +2,9 @@ import { productModel } from "../models/product.model.js";
 import CustomError from "./errors/custom-error.js";
 import { EErrors } from "./errors/enum.js";
 import { getErrorInfo } from "./errors/info.js";
+import EmailService from "./email.services.js";
 
+const emailService = new EmailService();
 class ProductService {
   async addProduct({
     title,
@@ -11,7 +13,7 @@ class ProductService {
     code,
     stock,
     category,
-    thumbnails,
+    thumbnail,
     owner,
   }) {
     try {
@@ -45,7 +47,7 @@ class ProductService {
         stock,
         category,
         status: true,
-        thumbnails: thumbnails || [],
+        thumbnail: thumbnail || [],
         owner: owner || "admin",
       });
 
@@ -133,10 +135,19 @@ class ProductService {
     }
   }
 
+  
+
   async deleteProduct(id) {
     try {
+      const productFound = await productModel.findById(id);
       const productDeleted = await productModel.findByIdAndDelete(id);
       if (productDeleted) {
+        if (productFound.owner !== "admin") {
+          await emailService.sendEmailDeleteProduct(productFound.owner,productFound.title);
+          console.log("Email enviado con exito");
+        }
+        console.log("Producto eliminado con exito");
+        return productDeleted;
       } else {
         throw CustomError.createError({
           name:"Error al borrar el producto",

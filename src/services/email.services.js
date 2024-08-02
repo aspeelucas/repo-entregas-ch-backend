@@ -58,6 +58,46 @@ class EmailService {
       console.error("Error al enviar el email", error);
     }
   }
+
+  async sendEmailDeleteUserInactivity(email) {
+    try {
+      const mailOptions = {
+        from: "Ecommerce Top <aspeelucas@gmail.com>",
+        to: email,
+        subject: "Aviso de baja",
+        html: `
+        <h1>Aviso de baja por inactividad</h1>
+        <h2>Hola ${email}</h2>
+        <p>Te enviamos este correcto para notificarte que tu cuenta se a eliminado por inactividad.</p>
+        <p>Si deseas recuperar tu cuenta, por favor contacta con el soporte tecnico</p>
+        `,
+      };
+      await this.transporter.sendMail(mailOptions);
+    } catch (error) {
+      console.error("Error al enviar el email", error);
+    }
+  }
+
+  async sendEmailDeleteProduct (email,product){
+    try {
+      const mailOptions = {
+        from: "Ecommerce Top <aspeelucas@gmail.com>",
+        to: email,
+        subject: "Producto eliminado",
+        html: `
+        <h1>Producto eliminado por un admin</h1>
+        <h2>Hola ${email}</h2>
+        <p>Te enviamos este correcto para notificarte que tu producto publicado fue eliminado por un admin.</p>
+        <p>Producto eliminado : ${product}</p>
+        <p>Si deseas mas informacion por favor contacta con el soporte tecnico</p>
+        `,
+      };
+      await this.transporter.sendMail(mailOptions);
+    } catch (error) {
+      console.error("Error al enviar el email", error);
+    }
+
+  }
 }
 
 export default EmailService;

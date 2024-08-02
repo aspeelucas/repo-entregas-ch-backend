@@ -1,198 +1,208 @@
-body{
-    background-color: rgb(240, 240, 240);
-
+.tittleHeader{
+  background-image: url("../img/banner.jpg");
+  height: 300px;
 }
-
-h1{
-    
-    text-align: center;
-}
-h2{
-    
-    text-align: center;
-    margin-top: 20px;
-}
-h4{
-   
-    text-align: center;
-    margin-top: 60px;
-    font-size: 30px;
-    
-}
-h3{
-    color: rgb(38, 39, 43);
-    text-transform: uppercase;
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-.formSyle{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-}
-.formCuerpo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-#inRealTime{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap ;
-    gap: 20px;
-}
-
-.cardProd{
-    text-align: center;
-   background-color: rgb(178, 183, 197);
-    border-radius: 10px;
-    padding: 10px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+.tittleHeader h1{
+   color: white;
+   font-size: 3rem;
+   display: flex;
+   font-family: "Roboto Slab", serif;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   margin: 0;
+   font-weight: 600;
+   text-transform: uppercase;
 }
 
 
-
-
-.titlePrincipal{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+h4 {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 30px;
+}
+h3 {
+  color: rgb(38, 39, 43);
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-top: 10px;
 }
 
-.productListContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-    align-items: center;
-    gap: 40px;
-}
-.card-body{
-    background-color: #F0FAFC;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-.card-text{
-    font-size: 1.2rem;
-    text-transform: capitalize;
-    font-weight: 600;
+.formSyle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  width: 100%;
 }
 
-.acctionsButtonPage{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    align-items: center;
+.productListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+  gap: 40px;
 }
-.acctionsButtonPage a {
-    text-decoration: none;
-    color: white;
-}
-.textPage{
-    text-align: center;
-    margin-top: 15px;
-    font-weight: 600;
-}
-.selectContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 20px;
-    margin-bottom: 50px;
-}
-.selectContainer select{
-    padding: 10px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border-radius: 5px;
-    width: 20%;
-}
+/*  */
 
-.accordion-button collapsed{
-    background-color: red;
-    color: black;
-    border: 1px solid black;
-    border-radius: 5px;
-    font-weight: 600;
-}
-
-.backGroundColorAccordion{
-    background-color: #F0FAFC;
-    color: black;
-    border: 0.1px solid rgba(180, 195, 224, 0.199);
-    font-weight: 600;
-    width: 10%;
-    
-}
-.accordion-header{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.menuCollap{
-    display: flex;
-    justify-content: start;
-    align-items: start;
-  }
+.card{
+  width: 300px;
   
-  .menuCollap p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: #ddf5fa57;
+}
+.card img{
+  width: 60%; 
+}
+.containerCardImg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+  border-radius: 10px;
+  height: 198.8px;
+}
+
+
+
+
+
+
+/*  */
+
+
+
+.card-body {
+  background-color: #ddf5fa57;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+ 
+}
+
+.card-body p {
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 600;
+  margin: 0px;
+  padding: 5px;
+}
+
+
+
+.titlePrincipal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.productListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+  gap: 40px;
+}
+.card-body {
+  background-color: #f0fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.card-text {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.btn-primary {
+  --bs-btn-bg: rgba(161, 206, 209, 0.555);
+  --bs-btn-border-color: none;
+  --bs-btn-color: #333;
+  --bs-btn-hover-bg: rgba(161, 206, 209, 0.555);
+  font-weight: 600;
   
-    color: white;
-    text-align: center;
-  }
-  
-  .menuCollap i{
-    text-decoration: none;
-    color: white;
-    font-size: 15px;
-  }
-  
-  .containerLogOut{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .textoRol{
-    margin: 0px;
-  }
-  
-  .buttonLogOut{
-    font-size: 14px;
-   
-  }
-  
-  .navBarOpt{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .infoUserNav{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+}
+
+.widthButtonAdd {
+  width: 150px;
+}
+
+.saveChangeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuCollap {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
+
+.menuCollap p {
+  color: white;
+  text-align: center;
+}
+
+.menuCollap i {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+}
+
+.containerLogOut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.textoRol {
+  margin: 0px;
+}
+
+.buttonLogOut {
+  font-size: 14px;
+}
+
+.navBarOpt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.infoUserNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.widthFormProduct {
+  width: 500px;
+}
+
+.formProducts{
     width: 100%;
-  }
+}

@@ -33,13 +33,11 @@ class CartService {
       const productExist = cart.products.find(
         (item) => item.product._id.toString() === productId
       );
-
-      console.log(productExist);
       if (product.owner === cart.user) {
         throw CustomError.createError({
           name: "No puedes agregar tu propio producto al carrito",
           source: getErrorInfo({ id: productId }, 7),
-          message: "Error al agregar el producto al carrito",
+          message: "No puedes agregar tu propio producto al carrito",
           code: EErrors.NOT_FOUND,
         });
       }
@@ -201,5 +199,6 @@ class CartService {
     }
   }
 }
+
 
 export default CartService;

@@ -2,7 +2,9 @@ import passport from "passport";
 import Handlebars from "handlebars";
 import { faker } from "@faker-js/faker";
 import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUiExpress from "swagger-ui-express";
+import UsersService from "../services/users.service.js";
+
+const usersService = new UsersService();
 
 const passportCall = (strategy) => {
   return async (req, res, next) => {
@@ -22,8 +24,10 @@ const passportCall = (strategy) => {
 };
 
 const authorization = (role) => {
+
   return async (req, res, next) => {
-    if (req.user.rol !== role) {
+    const user = await usersService.findUser(req.user.email);
+    if (user.rol !== role ) {
       return res.status(403).send({ error: "No tienes permisos suficientes" });
     }
     next();
@@ -43,7 +47,7 @@ const unauthorizedRoute = () => {
   return function (req, res, next) {
     passport.authenticate("jwt", function (error, user) {
       if (user) {
-        return res.redirect("/products");
+        return res.redirect("/current");
       }
       next();
     })(req, res, next);

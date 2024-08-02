@@ -1,8 +1,9 @@
 import ProductService from "../services/products.service.js";
-const productService = new ProductService();
 import CustomError from "../services/errors/custom-error.js";
 import { EErrors } from "../services/errors/enum.js";
 import { getErrorInfo } from "../services/errors/info.js";
+
+const productService = new ProductService();
 
 class ProductController {
   async addProduct(req, res) {
@@ -128,11 +129,15 @@ class ProductController {
   async deleteProduct(req, res) {
     const { pid } = req.params;
     try {
-      await productService.getProductById(pid);
-      await productService.deleteProduct(pid);
-      req.logger.info(`Producto eliminado con exito`);
-      return res.json({ message: "Producto eliminado con exito" });
+      const productFound = await productService.deleteProduct(pid);
+      if (productFound) {
+        req.logger.info(`Producto eliminado con exito`);
+        return res.json({ message: "Producto eliminado con exito" });
+      }
+      req.logger.error("Producto no encontrado");
+      return res.status(404).json({ error: "Producto no encontrado" });
     } catch (error) {
+      req.logger.error("Error al eliminar el producto", error);
       return res
         .status(500)
         .json({ error: "Error interno del servidor", reason: error.message });

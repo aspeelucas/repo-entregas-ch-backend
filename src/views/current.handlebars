@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/{{fileCss}}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <nav class="navbar navbar-expand-lg  bg-dark " data-bs-theme="dark">
     <div class="container-fluid ">
-        <a class="navbar-brand" href="/products">Ecommerce</a>
+        <a class="navbar-brand" href="/current">Ecommerce</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,24 +40,30 @@
 </nav>
 
 <body>
+      <div class="tittleHeader">
+            <h1>Bienvenido a nuestra tienda <i class="bi bi-basket"></i></h1>
+        </div>
+    <div class="containerTittle">
+    </div>
     <div class="containerFather">
         <div class="containerProfile">
-            <h1>Perfil de usuario</h1>
+            <h1>Panel de usuario</h1>
             <h2>Nombre: {{userDto.name}}</h2>
             <h3>Apellido: {{userDto.surname}}</h2>
                 <h2>Email: {{userDto.email}}</h2>
                 <h3>Rol: {{userDto.role}}</h2>
                     <h2>Nombre completo: {{userDto.fullName}}</h2>
                     <div class="optProfileButton">  
-                         {{#if_eq userDto.role "user"}} <a href="/chat" type="button" class="btn btn-primary">Chat<i class="bi bi-chat-dots"></i></a>{{/if_eq}}
-                         {{#if_eq userDto.role "user"}}<a href="/products" type="button" class="btn btn-primary">Productos<i class="bi bi-bag"></i></a>{{/if_eq}}
-                          {{#if_eq userDto.role "user"}}<a href="/carts/{{userDto.cart}}" type="button" class="btn btn-primary"> Carrito<i class="bi bi-cart-plus"></i></a>{{/if_eq}}
-                           {{#if_eq userDto.role "admin"}}<a href="/realtimeproducts" type="button" class="btn btn-primary">Gestion<i class="bi bi-pencil"></i></a>{{/if_eq}}
-                            {{#if_eq userDto.role "premium"}}<a href="/panel-premium" type="button" class="btn btn-primary">Panel Premiun<i class="bi bi-pencil"></i></a>{{/if_eq}}
-                             {{#if_eq userDto.role "premium"}} <a href="/chat" type="button" class="btn btn-primary">Chat<i class="bi bi-chat-dots"></i></a>{{/if_eq}}
-                             {{#if_eq userDto.role "premium"}}<a href="/products" type="button" class="btn btn-primary ">Productos<i class="bi bi-bag"></i></a>{{/if_eq}}
+                         {{#if_eq userDto.role "user"}} <a href="/chat" type="button" class="btn btn-primary">Chat <i class="bi bi-chat-dots"> </i></a>{{/if_eq}}
+                         {{#if_eq userDto.role "user"}}<a href="/products" type="button" class="btn btn-primary">Tienda <i class="bi bi-bag"> </i></a>{{/if_eq}}
+                          {{#if_eq userDto.role "user"}}<a href="/carts/{{userDto.cart}}" type="button" class="btn btn-primary"> Carrito <i class="bi bi-cart-plus"></i></a>{{/if_eq}}
+                           {{#if_eq userDto.role "admin"}}<a href="/realtimeproducts" type="button" class="btn btn-primary">Gestion de productos<i class="bi bi-pencil"></i></a>{{/if_eq}}
+                           {{#if_eq userDto.role "admin"}}<a href="/users-list" type="button" class="btn btn-primary">Gestion de Usuarios <i class="bi bi-people"></i></a>{{/if_eq}}
+                            {{#if_eq userDto.role "premium"}}<a href="/panel-premium" type="button" class="btn btn-primary">Panel Premiun <i class="bi bi-pencil"></i></a>{{/if_eq}}
+                             {{#if_eq userDto.role "premium"}} <a href="/chat" type="button" class="btn btn-primary">Chat <i class="bi bi-chat-dots"> </i></a>{{/if_eq}}
+                             {{#if_eq userDto.role "premium"}}<a href="/products" type="button" class="btn btn-primary ">Tienda <i class="bi bi-bag"> </i></a>{{/if_eq}}
                               {{#if_eq userDto.role "user"}} <a href="/premium-documents"  type="button" class="btn btn-primary btnWidth">Documentacion<i class="bi bi-chat-dots"></i></a>{{/if_eq}}
-                          {{#if_eq userDto.role "premium"}}<a href="/carts/{{userDto.cart}}" type="button" class="btn btn-primary"> Carrito<i class="bi bi-cart-plus"></i></a>{{/if_eq}}           
+                          {{#if_eq userDto.role "premium"}}<a href="/carts/{{userDto.cart}}" type="button" class="btn btn-primary"> Carrito <i class="bi bi-cart-plus"></i></a>{{/if_eq}}           
                     </div>
                      {{#if_eq userDto.role "user"}} <div  class="logoutButtonProfile">
                         <p class="changeRole">Te gustaria vender tus productos ? Hazte Premium y comienza ya!.</p>
@@ -68,12 +75,13 @@
                         <a onclick="changeRole('{{userDto.id}}')" type="button" class="btn btn-primary">Convertir en Usuario<i class="bi bi-person-circle"></i></a>
                     </div>{{/if_eq}}
                     <div class="logoutButtonProfile">
-                        <a href="/api/sessions/logout" type="button" class="btn btn-primary">Cerrar sesion<i class="bi bi-box-arrow-right"></i></a>
+                        <a href="/api/sessions/logout" type="button" class="btn btn-primary">Cerrar sesion <i class="bi bi-box-arrow-right"></i></a>
                     </div>
         </div>
     </div>
 
     <script src="/js/change.role.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>

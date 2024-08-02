@@ -12,17 +12,20 @@ const usersService = new UsersService();
 
 class ViewsController {
   async getProducts(req, res) {
-    const page = req.query.page;
+    let page = req.query.page;
     const limit = req.query.limit;
     const sort = req.query.sort || undefined;
     const category = req.query.category;
+    
 
     const query = {};
     if (category) {
       query.category = category;
+      page = 1;
     }
 
     try {
+      const user = req.user;
       const products = await productService.getProducts(
         limit,
         page,
@@ -38,6 +41,10 @@ class ViewsController {
       if (!products || page > products.totalPages || page < 1) {
         return res.render("productError", { fileCss: "productError.css" });
       }
+      // VERRIFICAR SI EL USUARIO ESTA LOGUEADO
+      const updatedUser = await usersService.findUser(user.email);
+
+      const userDto = new UserDto(updatedUser);
 
       res.render("products", {
         status: "success",
@@ -48,10 +55,10 @@ class ViewsController {
         prevPage: products.prevPage,
         currentPage: products.page,
         totalPages: products.totalPages,
-        user: req.user,
+        user: userDto,
         fileCss: "products.css",
         sort,
-        categories: ["electrodomestico", "computadoras", "celulares"],
+        categories: new Set(products.docs.map((product) => product.category)),
         query: req.query,
         category,
       });
@@ -75,14 +82,18 @@ class ViewsController {
 
   async panelPremium(req, res) {
     try {
-      res.render("panelPremium", { fileCss: "panelPremium.css", user: req.user });
+      const user = req.user;
+      const updatedUser = await usersService.findUser(user.email);
+      const userDto = new UserDto(updatedUser);
+      res.render("panelPremium", {
+        fileCss: "panelPremium.css",
+        user: userDto,
+      });
     } catch (error) {
       res.render("productError", { fileCss: "productError.css" });
       req.logger.error("Error al ingresar al panel premium", error);
-
+    }
   }
-
-}
 
   async chat(req, res) {
     try {
@@ -97,6 +108,7 @@ class ViewsController {
     const cartId = req.params.cid;
 
     try {
+      const user = req.user;
       const carrito = await cartService.getCart(cartId);
       if (!carrito) {
         return res.render("productError");
@@ -106,10 +118,12 @@ class ViewsController {
         product: item.product.toObject(),
         quantity: item.quantity,
       }));
+      const updatedUser = await usersService.findUser(user.email);
 
+      const userDto = new UserDto(updatedUser);
       res.render("cart", {
         productos: productosEnCarrito,
-        user: req.user,
+        user: userDto,
         fileCss: "cart.css",
       });
     } catch (error) {
@@ -202,7 +216,6 @@ class ViewsController {
   }
 
   async premiumDocuments(req, res) {
-
     try {
       const user = req.user;
       if (!user) {
@@ -210,16 +223,29 @@ class ViewsController {
       }
       const userDto = new UserDto(user);
 
-      res.render("premiumRol", { fileCss: "documentsPremium.css" , userDto});
-      
+      res.render("premiumRol", { fileCss: "documentsPremium.css", userDto });
     } catch (error) {
       req.logger.error("Error al obtener los documentos premium", error);
       res.render("productError", { fileCss: "productError.css" });
-      
     }
-   
   }
 
+  async usersList(req, res) {
+    try {
+      const user = req.user;
+      if (!user) {
+        return res.redirect("/login");
+      }
+      const updatedUser = await usersService.findUser(user.email);
+      const userDto = new UserDto(updatedUser);
+      const users = await usersService.getUsers();
+
+      res.render("usersList", { fileCss: "usersList.css", userDto, users });
+    } catch (error) {
+      req.logger.error("Error al obtener la lista de usuarios", error);
+      res.render("productError", { fileCss: "productList.css" });
+    }
+  }
 }
 
 export default ViewsController;

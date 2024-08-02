@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+
 .containerFather {
   width: 100%;
   height: 100vh;
@@ -7,6 +10,32 @@
   align-items: center;
   background-color: rgba(161, 206, 209, 0.301);
 }
+.containerTittle{
+  background-color: rgba(161, 206, 209, 0.301);
+  margin: 0;
+  text-align: center;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tittleHeader{
+  background-image: url("../img/banner.jpg");
+  height: 300px;
+}
+.tittleHeader h1{
+   color: white;
+   font-size: 3rem;
+   display: flex;
+   font-family: "Roboto Slab", serif;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   margin: 0;
+   font-weight: 600;
+   text-transform: uppercase;
+}
+
 
 .containerProfile {
   width: 40%;
@@ -18,6 +47,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: -300px;
 }
 .containerProfile h1 {
   text-align: center;
@@ -42,6 +72,7 @@
   background-color: rgba(139, 135, 135, 0.164);
   text-transform: capitalize;
 }
+
 
 .logoutButtonProfile {
   width: 100%;

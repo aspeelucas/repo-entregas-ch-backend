@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 import configObjet from "./config/config.js";
 const {mongo_url} = configObjet;
 

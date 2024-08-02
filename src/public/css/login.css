@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
 .containerLoginGral{
-    /* background-color: #99E4F3; */
     background-image: url(../img/black-white-bokeh-particles.jpg);
     width: 100%;
     height: 100%;
@@ -8,7 +9,13 @@
     justify-content: center;
     align-items: center;
 }
-
+.tittleLogin{
+    color: white;
+    margin-bottom: 700px;
+    font-family: "Roboto Slab", serif;
+    font-size: 60px;
+    font-weight: 600;
+}
 .containerLogin{
     background-color:#d3f0f6c5 ;
     position: absolute;
@@ -17,6 +24,10 @@
 }
 .containerTitle{
     display: flex;
+    color: white;
+    font-family: "Roboto Slab", serif;
+    /* agrega efecto de relieve a las letras */
+    text-shadow: 2px 2px 4px #000000;
     justify-content: center;
     align-items: center;
     margin-top: 10px;

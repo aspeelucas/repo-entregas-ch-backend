@@ -1,4 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
+.tittleHeader{
+   background-image: url("../img/banner.jpg");
+   height: 300px;
+}
+.tittleHeader h1{
+    color: white;
+    font-size: 3rem;
+    display: flex;
+    font-family: "Roboto Slab", serif;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+}
 .titlePrincipal{
     display: flex;
     justify-content: center;
@@ -38,8 +55,33 @@
     align-items: center;
     gap: 40px;
 }
+
+.containerCardImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+    border-radius: 10px;
+    height: 198.8px;
+}
+
+.card{
+    width: 300px;
+    height: 531px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background-color: #ddf5fa57;
+}
+.card img{
+    width: 60%;
+      
+}
 .card-body{
-    background-color: #F0FAFC;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,9 +89,10 @@
     gap: 10px;
 }
 .card-text{
-    font-size: 1.2rem;
+    font-size: 16px;
     text-transform: capitalize;
     font-weight: 600;
+    margin: 0px;
 }
 
 .acctionsButtonPage{
@@ -61,7 +104,7 @@
 }
 .acctionsButtonPage a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 .textPage{
     text-align: center;
@@ -156,3 +199,67 @@
     align-items: center;
     width: 100%;
   }
+  .containerBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+  }
+  .widthButton{
+    width:50%;
+    text-align: center;
+  }
+  .widthButtonAdd{
+     width: 200px;
+  }
+  .widhtInput{
+    width: 60%;
+  }
+
+  
+  .btn-primary {
+    --bs-btn-bg: rgba(161, 206, 209, 0.555);
+    --bs-btn-border-color: none;
+    --bs-btn-color: #333;
+    --bs-btn-hover-bg: rgba(161, 206, 209, 0.555);
+    font-weight: 600;
+    /* width: 200px; */
+  }
+
+
+  .button-container {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 0px;
+    margin-bottom: 70px;
+    margin-right: 5px;
+    z-index: 1000;
+}
+
+.circular-button {
+    background-color: rgba(161, 206, 209, 0.555);
+    border: none;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circular-button:hover {
+    transform: scale(1.1);
+    background-color: rgba(161, 206, 209, 0.719);
+    color: white;
+    transition: all 0.3s ease;
+
+}
+

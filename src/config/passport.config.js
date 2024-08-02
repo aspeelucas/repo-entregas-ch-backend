@@ -7,7 +7,6 @@ import { userModel } from "../models/user.model.js";
 import { isValidPassword, createHash } from "../utils/hashbcrypt.js";
 import CartService from "../services/carts.service.js";
 
-
 const cartService = new CartService();
 
 const initializePassport = () => {
@@ -99,7 +98,8 @@ const initializePassport = () => {
           if (user) {
             return done(null, user);
           } else {
-            const cart = await cartService.addCart(user.email);
+            const cart = await cartService.addCart(profile._json.email);
+            const last_connection = new Date();
             const newUser = {
               first_name: profile._json.name,
               last_name: "Github",
@@ -107,6 +107,7 @@ const initializePassport = () => {
               email: profile._json.email,
               password: "",
               cart: cart._id,
+              last_connection,
             };
             const result = await userModel.create(newUser);
             return done(null, result);

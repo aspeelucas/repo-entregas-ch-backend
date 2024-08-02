@@ -14,15 +14,6 @@ const productDefault = async (req, res) => {
   return productsFinal;
 };
 
-// const productsOwner = async (email) => {
-//   const products = await productService.getProductsByOwner(email.email);
-//       const productsFinal = products.map((product) => {
-//         const { ...rest } = product.toObject();
-//         return rest;
-//       });
-//   return productsFinal;
-// };
-
 const socketController = (httpServer) => {
   const io = new Server(httpServer);
 
@@ -37,7 +28,6 @@ const socketController = (httpServer) => {
       const product = await productService.getProductById(_id);
       socket.emit("product", product);
     });
-   
 
     socket.on("ownerPro", async (email) => {
       const products = await productService.getProductsByOwner(email.email);
@@ -91,7 +81,7 @@ const socketController = (httpServer) => {
     });
 
     // Delete owner products
-    socket.on("delete-owner-products", async ({_id,email}) => {
+    socket.on("delete-owner-products", async ({ _id, email }) => {
       try {
         await productService.deleteProduct(_id);
         const products = await productService.getProductsByOwner(email);

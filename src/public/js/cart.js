@@ -1,42 +1,43 @@
+
+
 const addCart = async (idCart, idProduct) => {
   try {
+    const quantity = document.getElementById(idProduct).value;
     const response = await fetch(`/api/cart/${idCart}/product/${idProduct}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({quantity: quantity}),
     });
-    console.log(response.status);
     const data = await response.json();
     if (response.ok) {
       Toastify({
-        text: "Producto agregado al carrito",
+        text:"Producto agregado al carrito" ,
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
         style: {
           background:
-            "linear-gradient(90deg, rgba(3,2,23,1) 0%, rgba(9,23,110,1) 33%, rgba(0,212,255,1) 100%)",
+            "#1FC40B",
         },
-        onClick: function () {}, // Callback after click
+        onClick: function () {}, 
       }).showToast();
     } else {
       Toastify({
         text: "Error al agregar el producto al carrito",
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
         style: {
           background:
-            "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(121,9,9,1) 36%, rgba(255,16,0,1) 100%)",
+            "red",
         },
-        onClick: function () {}, // Callback after click
+        onClick: function () {}, 
       }).showToast();
     }
     return data;
@@ -59,16 +60,18 @@ const deleteProduct = async (idCart, idProduct) => {
       duration: 3000,
       destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top", 
+      position: "right", 
+      stopOnFocus: true, 
       style: {
         background:
-          "linear-gradient(90deg, rgba(3,2,23,1) 0%, rgba(9,23,110,1) 33%, rgba(0,212,255,1) 100%)",
+          "#1FC40B",
       },
-      onClick: function () {}, // Callback after click
+      onClick: function () {}, 
     }).showToast();
-    // location.reload();
+    setTimeout(function(){
+      location.reload();
+  }, 1000)
     return data;
   } catch (error) {
     console.log(error);
@@ -84,16 +87,15 @@ const deleteAllProducts = async (idCart) => {
     Toastify({
       text: "Carrito vacio",
       duration: 3000,
-      destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top", 
+      position: "right", 
+      stopOnFocus: true, 
       style: {
         background:
-          "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(121,9,9,1) 36%, rgba(255,16,0,1) 100%)",
+          "red",
       },
-      onClick: function () {}, // Callback after click
+      onClick: function () {}, 
     }).showToast();
   } else {
     try {
@@ -107,17 +109,19 @@ const deleteAllProducts = async (idCart) => {
       Toastify({
         text: "Se vacio el carrito",
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
         style: {
           background:
-            "linear-gradient(90deg, rgba(3,2,23,1) 0%, rgba(9,23,110,1) 33%, rgba(0,212,255,1) 100%)",
+            "#1FC40B",
         },
-        onClick: function () {}, // Callback after click
+        onClick: function () {}, 
       }).showToast();
+      setTimeout(function(){
+        location.reload();
+    }, 1000)
       
       return data;
     } catch (error) {
@@ -143,16 +147,41 @@ const checkOut = async (idCart) => {
     Toastify({
       text: "No se pudo realizar la compra",
       duration: 3000,
-      destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top", 
+      position: "right", 
+      stopOnFocus: true, 
       style: {
         background:
-          "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(121,9,9,1) 36%, rgba(255,16,0,1) 100%)",
+          "red",
       },
-      onClick: function () {}, // Callback after click
+      onClick: function () {}, 
     }).showToast();
   }
 };
+
+
+
+
+
+let buttonValue;
+
+decreseNumber = (id) => {
+ buttonValue = parseInt(document.getElementById(`${id}`).value) - 1;
+  if (buttonValue < 1) {
+    buttonValue = 1;
+  }
+  document.getElementById(`${id}`).value = buttonValue;
+  
+}
+
+increaseNumber = (stock,id) => {
+  buttonValue = parseInt(document.getElementById(`${id}`).value) + 1;
+  if (buttonValue > stock) {
+    buttonValue = stock;
+  }
+  document.getElementById(`${id}`).value = buttonValue;
+  
+}
+
+

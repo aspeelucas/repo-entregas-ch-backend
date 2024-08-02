@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+.tittleHeader{
+   background-image: url("../img/banner.jpg");
+   height: 300px;
+}
+.tittleHeader h1{
+    color: white;
+    font-size: 3rem;
+    display: flex;
+    font-family: "Roboto Slab", serif;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
 .menuCollap{
     display: flex;
     justify-content: start;
@@ -48,6 +67,8 @@
   }
 
 
+
+
 .productListContainer{
     display: flex;
     flex-wrap: wrap;
@@ -55,6 +76,31 @@
     margin-top: 20px;
     align-items: center;
     gap: 40px;
+}
+
+.containerCardImg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.card{
+  width: 300px;
+  height: 531px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: #ddf5fa57;
+}
+.card img{
+  width: 60%;
+    
 }
 .card-body{
     background-color: #F0FAFC;
@@ -65,9 +111,14 @@
     gap: 10px;
 }
 .card-text{
-    font-size: 1.2rem;
-    text-transform: capitalize;
-    font-weight: 600;
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 600;
+  margin: 0px;
+}
+.card button{
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 
@@ -78,3 +129,23 @@
     margin-top: 50px;
     gap: 30px ;
 }
+
+.btn-primary {
+  --bs-btn-bg: rgba(161, 206, 209, 0.555);
+  --bs-btn-border-color: none;
+  --bs-btn-color: #333;
+  --bs-btn-hover-bg: rgba(161, 206, 209, 0.555);
+  font-weight: 600;
+  width: 200px;
+  
+}
+
+
+.cartEmpty{
+  color : #333;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 100px;
+}
+

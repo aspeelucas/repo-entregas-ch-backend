@@ -33,7 +33,7 @@
                 <div class="containerLogOut">
                     <p class="textoRol">Bienvenido : {{user.email}} </p>
                     <div class="infoUserNav"> 
-                        <p class="textoRol">Rol :<i class="bi bi-person-fill"></i> {{user.rol}} </p>
+                        <p class="textoRol">Rol :<i class="bi bi-person-fill"></i> {{user.role}} </p>
                     <a href="/api/sessions/logout" type="button" class="btn btn-dark buttonLogOut">Cerrar Sesion <i
                             class="bi bi-box-arrow-right"></i></a>
                     </div>
@@ -43,6 +43,9 @@
     </div>
 </nav>
 <body>
+  <div class="tittleHeader">
+    <h1>Nuestros Productos</h1>
+  </div>
   <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="2000">
@@ -61,10 +64,9 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
-
-
-
+ <div class="button-container">
+        <a href="/carts/{{user.cart}}" class="circular-button"><i class="bi bi-cart4"></i></a>
+  </div>
     <div class="titlePrincipal">
       <h1>Listado de Productos</h1>
     </div>
@@ -116,7 +118,9 @@
   <div class="productListContainer">
     {{#each payload}}
     <div class="card" style="width: 20rem;">
-      <img src="" class="card-img-top" alt="...">
+      <div class="containerCardImg">
+      <img src="{{this.thumbnail}}" class="card-img-top" alt="...">
+      </div>
       <div class="card-body">
         <h5 class="card-title">Marca {{this.title}}</h5>
         <p class="card-text">Descripcion: {{this.description}}</p>
@@ -124,21 +128,29 @@
         <p class="card-text">Stock disponible: {{this.stock}} und</p>
         <p class="card-text">Categoria: {{this.category}}</p>
         <p class="card-text">Id: {{this._id}}</p>
-         <a id="addToCart" onclick="addCart('{{../user.cart}}','{{this._id}}')" class="btn btn-primary">Agregar a carrito</a>
+        <div class="containerBtn">
+        <button class="btn btn-primary widthButton" onclick="increaseNumber('{{this.stock}}','{{this._id}}')">+</button>
+          <input class="form-control widhtInput " disabled type="number" id="{{this._id}}" value="1" min="1" max="{{this.stock}}">
+        <button class="btn btn-primary widthButton" onclick="decreseNumber('{{this._id}}')" >-</button>
+        </div>
+         <a id="addToCart" onclick="addCart('{{../user.cart}}','{{this._id}}')" class="btn btn-primary widthButtonAdd">Añadir al carrito<i class="bi bi-cart-plus"></i></a>
       </div>
     </div>
     {{/each}}
 
+   
+
   </div>
+  {{!-- <a class="cartFixed" href=""><i class="bi bi-cart4"></i></a> --}}
   <div class="acctionsButtonPage">
     {{#if hasPrevPage}}
     <a type="button" class="btn btn-primary"
-      href="/products?page={{prevPage}}&{{getUpdatedQuery query 'page'}}">Anterior</a>
+      href="/products?page={{prevPage}}&{{getUpdatedQuery query 'page'}}"><i class="bi bi-arrow-left-circle"></i> Anterior</a>
     {{/if}}
     <p class="textPage">Pagina {{currentPage}} de {{totalPages}}</p>
     {{#if hasNextPage}}
     <a type="button" class="btn btn-primary"
-      href="/products?page={{nextPage}}&{{getUpdatedQuery query 'page'}}">Siguiente</a>
+      href="/products?page={{nextPage}}&{{getUpdatedQuery query 'page'}}">Siguiente <i class="bi bi-arrow-right-circle"></i></a>
     {{/if}}
   </div>
 

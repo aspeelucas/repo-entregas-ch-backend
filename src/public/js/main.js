@@ -9,27 +9,31 @@ socket.on("allProducts", (data) => {
 
   data.forEach((product) => {
     listaInRealTime.innerHTML += `
-        <div class="cardProd">
-        <h3> ${product.title} </h3>
-        <p>Descripcion : ${product.description} </p>
-        <p>Precio: ${product.price} </p>
-        <img src="${product.thumbnail}" alt="imagen del producto" width="100px" height="100px">
-        <p>Code: ${product.code} </p>
-        <p>Stock : ${product.stock} </p>
-        <p>Status : ${product.status} </p>
-        <p>Id : ${product._id}</p>
-        <p>Owner : ${product.owner}</p>
-        <button onclick=" 
-        socket.emit('delete-product', '${product._id}')
-        ">Eliminar</button>
+    <div class="card" style="width: 20rem;">
+    <div class="containerCardImg">
+     <img src="${product.thumbnail}" class="card-img-top" alt="...">
+    </div>
+        <div class="card-body">
+        <h3 class="card-title"> ${product.title} </h3>
+        <p class=" fontSize">Descripcion : ${product.description} </p>
+        <p class="card-text">Precio: ${product.price} </p>
+        <p class="card-text">Code: ${product.code} </p>
+        <p class="card-text">Stock : ${product.stock} </p>
+        <p class="card-text">Status : ${product.status} </p>
+        <p class="card-text">Categoria : ${product.category} </p>
+        <p class="card-text">Id : ${product._id}</p>
+        <p class="card-text">Owner : ${product.owner}</p>
+        <button class="btn btn-danger widthButtonAdd" onclick=" 
+        socket.emit('delete-product', '${product._id}', alert('Producto Eliminado'))
+        ">Eliminar <i class="bi bi-trash3"></i></button>
 
 
-        <button  onclick=" 
+        <button class="btn btn-primary widthButtonAdd"  onclick=" 
         socket.emit('get-product', '${product._id}')
         "
         class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        >Ver</button>  
-
+        >Editar <i class="bi bi-pencil"></i></button>  
+    </div>
 </div>
 
   `;
@@ -42,26 +46,29 @@ socket.on("allProductsOwner", (data) => {
 
   data.forEach((product) => {
     listaInRealTimee.innerHTML += `
-        <div class="cardProd">
-        <h3> ${product.title} </h3>
-        <p>Descripcion : ${product.description} </p>
-        <p>Precio: ${product.price} </p>
-        <img src="${product.thumbnail}" alt="imagen del producto" width="100px" height="100px">
-        <p>Code: ${product.code} </p>
-        <p>Stock : ${product.stock} </p>
-        <p>Status : ${product.status} </p>
-        <p>Id : ${product._id}</p>
-        <p>Owner : ${product.owner}</p>
-        <button onclick=" 
-        socket.emit('delete-owner-products',{_id: '${product._id}', email: '${product.owner}'})
-        ">Eliminar</button>
-
-
+        <div class="card" style="width: 20rem;">
+        <div class="containerCardImg">
+        <img src="${product.thumbnail}" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+        <h3 class="card-title"> ${product.title} </h3>
+        <p class="card-text">Descripcion : ${product.description} </p>
+        <p class="card-text">Precio: ${product.price} </p> 
+        <p class="card-text">Code: ${product.code} </p>
+        <p class="card-text">Stock : ${product.stock} </p>
+        <p class="card-text">Status : ${product.status} </p>
+        <p class="card-text">Id : ${product._id}</p>
+        <p class="card-text">Owner : ${product.owner}</p>
+        <button class="btn btn-danger widthButtonAdd" onclick=" 
+        socket.emit('delete-owner-products',{_id: '${product._id}', email: '${product.owner}'
+        },alert('Producto Eliminado'))
+        ">Eliminar <i class="bi bi-trash3"></i></button>
         <button  onclick=" 
         socket.emit('get-product', '${product._id}')
         "
-        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        >Ver</button>  
+        class="btn btn-primary widthButtonAdd" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        >Editar <i class="bi bi-pencil"></i></button>  
+       </div> 
 
 </div>
 
@@ -69,16 +76,12 @@ socket.on("allProductsOwner", (data) => {
   });
 });
 
-getProductsByOwner = (email) =>{
-  socket.emit("ownerPro",{email});
-}
-
-
-
-
+getProductsByOwner = (email) => {
+  socket.emit("ownerPro", { email });
+};
 
 const form = document.querySelector("form");
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const dataForm = new FormData(form);
 
@@ -95,6 +98,19 @@ form.addEventListener("submit", (event) => {
   };
 
   socket.emit("new-product", post);
+  
+   await Toastify({
+    text: "Producto agregado con exito",
+    duration: 3000,
+    newWindow: true,
+    gravity: "top",
+    position: "right",
+    stopOnFocus: true,
+    style: {
+      background: "#1FC40B",
+    },
+    onClick: function () {},
+  }).showToast();
 
   form.reset();
 });
@@ -126,8 +142,8 @@ socket.on("product", (data) => {
 </select>
 </div>
 <div class="mb-3">
-<label for="exampleInputEmail1" class="form-label">Thumbnail</label>
-<input required type="text"  name="thumbnail" class="form-control" id="exampleInputEmail1" value= "${data.thumbnail}" aria-describedby="emailHelp">
+<label for="exampleInputEmail1" class="form-label">Imagen URL</label>
+<input  type="url"  name="thumbnail" class="form-control" id="exampleInputEmail1" value= "${data.thumbnail}" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
 <label for="exampleInputEmail1" class="form-label">Code</label>
@@ -149,35 +165,45 @@ socket.on("product", (data) => {
 
 
   <div class="mb-3 form-check">
-    <input required type="checkbox" name="status" class="form-check-input" id="exampleCheck1">
+    <input required type="checkbox"  " name="status" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Estado</label>
   </div>
-  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
+  <div class="saveChangeBtn">
+  <button type="submit" class="btn btn-primary" >Guardar Cambios</button>
+  </div>
 </form>
   </div>
-    `
-    const updateForm = document.getElementById("updateForm");
-    updateForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const dataForm = new FormData(updateForm);
-      const id = event.target.id.value;
-      const owner = event.target.owner.value;
-      const post = {
-        title: dataForm.get("title"),
-        price: Number(dataForm.get("price")),
-        description: dataForm.get("description"),
-        category: dataForm.get("category"),
-        thumbnail: dataForm.get("thumbnail"),
-        code: Number(dataForm.get("code")),
-        stock: Number(dataForm.get("stock")),
-        status: dataForm.get("status") == "on" ? true : false,
-        owner: owner,
-      };
+    `;
+  const updateForm = document.getElementById("updateForm");
+  updateForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const dataForm = new FormData(updateForm);
+    const id = event.target.id.value;
+    const owner = event.target.owner.value;
+    const post = {
+      title: dataForm.get("title"),
+      price: Number(dataForm.get("price")),
+      description: dataForm.get("description"),
+      category: dataForm.get("category"),
+      thumbnail: dataForm.get("thumbnail"),
+      code: Number(dataForm.get("code")),
+      stock: Number(dataForm.get("stock")),
+      status: dataForm.get("status") == "on" ? true : false,
+      owner: owner,
+    };
+    socket.emit("update-product", { id, data: post });
+    Toastify({
+      text: "Producto actualizado con exito",
+      duration: 3000,
+      newWindow: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "#1FC40B",
+      },
+      onClick: function () {},
+    }).showToast();
     
-      socket.emit("update-product",{id,data:post});
-    
-    });  
-    ;
+  });
 });
-
-

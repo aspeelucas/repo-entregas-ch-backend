@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/{{fileCss}}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
   </head>
   <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/products">Ecommerce</a>
+      <a class="navbar-brand" href="/current">Ecommerce</a>
 
       <button
         class="navbar-toggler"
@@ -47,7 +52,6 @@
               >Carrito</a>{{/if_eq}}
             <a class="navbar-brand" href="/current">Perfil</a>
           </div>
-
           <div class="containerLogOut">
             <p class="textoRol">Bienvenido : {{userDto.email}} </p>
             <div class="infoUserNav">
@@ -67,57 +71,64 @@
   </nav>
 
   <body>
-
     <div class="containerFather">
       <div class="containerProfile">
-        <h1>Documentacion para acceder al Premium</h1>
-        <p>Para acceder al rol de premium es necesario que subas los siguientes
-          documentos</p>
-        <form data-user-id="{{userDto.id}}">
-          <div class="mb-3">
-            <label for="formFile" class="form-label">Identificacion (agrega
-              cualquier achivo .txt, este campo es de prueba)</label>
-            <input
-              required
-              class="form-control"
-              name="identificacion"
-              type="file"
-              id="formFile"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="formFile" class="form-label">Direccion (agrega cualquier
-              achivo .txt, este campo es de prueba)</label>
-            <input
-              required
-              class="form-control"
-              type="file"
-              name="address"
-              id="formFile"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="formFile" class="form-label">Estado de cuenta (agrega
-              cualquier achivo .txt, este campo es de prueba)</label>
-            <input
-              required
-              class="form-control"
-              name="account"
-              type="file"
-              id="formFile"
-            />
-          </div>
-          <div class="submitDocuments">
-            <button type="submit" class="btn btn-primary">Enviar <i class="bi bi-send"></i></button>
-          </div>
-        </form>
-        <div class="submitDocuments">
-          <a href="/current" class="btn btn-primary">Regresar <i class="bi bi-box-arrow-right"></i></a>
+        <h1>Gestion de Usuarios</h1>
+
+        <table class="table table-success table-striped-columns">
+          <thead>
+            <tr>
+
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">Email</th>
+              <th scope="col">Rol</th>
+              <th class="buttonActtionCenter" scope="col">Cambiar Rol</th>
+              <th class="buttonActtionCenter" scope="col">Eliminar usuario</th>
+            </tr>
+          </thead>
+          {{#each users}}
+            <tbody>
+              <tr>
+
+                <td>{{first_name}}</td>
+                <td>{{last_name}}</td>
+                <td>{{email}}</td>
+                <td>{{rol}}</td>
+                <td class="buttonActtionCenter"><button
+                    onclick="changeRoleForAdm('{{id}}')"
+                    type="button"
+                    class="btn btn-outline-danger"
+                  ><i class="bi bi-arrow-down-up"></i></button></td>
+                <td class="buttonActtionCenter"><button
+                    onclick="deleteUser('{{email}}')"
+                    type="button"
+                    class="btn btn-outline-danger"
+                  ><i class="bi bi-trash"></i></button></td>
+              </tr>
+            </tbody>
+          {{/each}}
+        </table>
+
+        <p>Eliminar todos los usuarios con mas de 2 dias de inactividad</p>
+        <div class="logoutButtonProfile">
+          <a onclick="deleteUsers()" type="button" class="btn btn-danger">Eliminar<i
+              class="bi bi-trash"
+            ></i></a>
+        </div>
+
+        <div class="logoutButtonProfile">
+          <a href="/current" type="button" class="btn btn-primary">Regresar<i
+              class="bi bi-box-arrow-right"
+            ></i></a>
         </div>
       </div>
     </div>
-
-    <script src="/js/sendDocuments.js"></script>
+    <script src="/js/change.role.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
   </body>
 
 </html>

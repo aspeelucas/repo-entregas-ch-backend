@@ -38,10 +38,11 @@ class CartController {
     const { pid, cid } = req.params;
     const quantity = req.body.quantity || 1;
     try {
-     
-      await cartService.addProductToCart(cid, pid, quantity);
+      await cartService.addProductToCart(cid, pid, +quantity);
       const updatedCart = await cartService.getCart(cid);
-      req.logger.info(`Producto agregado al carrito correctamente ${updatedCart}`);
+      req.logger.info(
+        `Producto agregado al carrito correctamente ${updatedCart}`
+      );
       return res.json({
         message: "El producto fue agregado con exito",
         updatedCart,
@@ -68,7 +69,7 @@ class CartController {
       req.logger.info(`Carrito actualizado correctamente ${updatedCart}`);
       return res.json(updatedCart);
     } catch (error) {
-     req.logger.error("Error al actualizar el carrito", error);
+      req.logger.error("Error al actualizar el carrito", error);
       return res.status(500).json({
         status: "error",
         error: "Error interno del servidor",
@@ -101,12 +102,12 @@ class CartController {
   async deleteAllProductsFromCart(req, res) {
     const { cid } = req.params;
     try {
-        await cartService.deleteAllProductsFromCart(cid);
-        req.logger.info(`Todos los productos fueron eliminados del carrito`);
-        return res.json({
-          status: "success",
-          message: "Todos los productos fueron eliminados del carrito",
-        });
+      await cartService.deleteAllProductsFromCart(cid);
+      req.logger.info(`Todos los productos fueron eliminados del carrito`);
+      return res.json({
+        status: "success",
+        message: "Todos los productos fueron eliminados del carrito",
+      });
     } catch (error) {
       req.logger.error("Error al eliminar los productos del carrito", error);
       return res.status(500).json({
