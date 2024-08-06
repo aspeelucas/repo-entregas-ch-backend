@@ -48,7 +48,9 @@ class EmailService {
         <p>Tu token de restablecimiento es: ${token}</p>
         <p>Este codigo expirara en 1 Hora</p>
         <p>Para restablecer tu contraseña haz click en el siguiente enlace</p>
-        <a href="http://localhost:8080/change-password">Restablecer contraseña</a>
+
+        <a href="https://repo-entregas-ch-backend-production.up.railway.app/change-password">Restablecer usando railway</a>
+        <a href="http://localhost:8080/change-password">Restablecer usando el servidor de forma local</a>
         <p>Si no fuiste tu, ignora este mensaje</p>
         `,
       };

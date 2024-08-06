@@ -58,7 +58,6 @@ const deleteProduct = async (idCart, idProduct) => {
     Toastify({
       text: "Se elimino el producto del carrito",
       duration: 3000,
-      destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
       gravity: "top", 
       position: "right", 
