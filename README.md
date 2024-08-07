@@ -61,6 +61,17 @@ Aqui se visualizan en detalle los productos seleccionados en la vista anterior. 
 Si la compra se realizo de forma exitosa podremos ver algunos detalles en el checkout. Se enviara un email al correo del usuario con todos los datos en forma detallada de su compra.
 [![checkout.png](https://i.postimg.cc/7ZWx4ch3/checkout.png)](https://postimg.cc/Xr9Mcswq)
 
+## Rol premium
+Existe la posibilidad de mejorar el rol de user base a premium y obtener los beneficios de crear productos y venderlos en la pagina, con algunas salvedades. El usuario premium solo podra crear, editar y borrar los productos que el creo. No podra autocomprarse los productos que el mismo creo.
+Para poder acceder a este rol es necesario que como paso previo suba documentacion a manera de validacion(para fines practictos solo se pide archivos ,txt).
+[![documentacion.png](https://i.postimg.cc/wx0ZnN7J/documentacion.png)](https://postimg.cc/Th5tDpjY)
+
+## Panel premium
+Aqui se podra crear, editar y eliminar los productos que el usuario desee vender.
+[![premium1.png](https://i.postimg.cc/cLYD1t4F/premium1.png)](https://postimg.cc/dhsR41CC)
+[![premium2.png](https://i.postimg.cc/j2LXpLFQ/premium2.png)](https://postimg.cc/H81X5sHV)
+
+
 
 
 
