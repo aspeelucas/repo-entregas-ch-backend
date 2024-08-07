@@ -221,3 +221,15 @@ h3 {
     justify-content: center;
     gap: 10px;
   }
+
+  footer {
+    background-color: #333;
+    color: white;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 200px;
+  }

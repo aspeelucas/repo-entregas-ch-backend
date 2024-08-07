@@ -81,6 +81,7 @@ viewRouter.get("/reset-password", viewsController.resetPassword);
 viewRouter.get("/change-password", viewsController.changePassword);
 viewRouter.get("/send-email", viewsController.sendEmail);
 viewRouter.get("/user-not-found", viewsController.userNotFound);
+viewRouter.get("/password-invalid-user", viewsController.passwordInvalid);
 viewRouter.get("/invalid-token", viewsController.invalidToken);
 viewRouter.get("/expired-token", viewsController.expiredToken);
 viewRouter.get("/password-repeat-error", viewsController.passRepeatError);

@@ -199,6 +199,10 @@ class ViewsController {
   async userNotFound(req, res) {
     res.render("userNotFound", { fileCss: "sendEmail.css" });
   }
+  async passwordInvalid(req, res) {
+    res.render("passwordInvalid", { fileCss: "sendEmail.css" });
+  }
+
   async invalidToken(req, res) {
     res.render("invalidToken", { fileCss: "sendEmail.css" });
   }

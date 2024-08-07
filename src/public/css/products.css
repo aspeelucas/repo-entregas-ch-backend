@@ -1,265 +1,265 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
 
-.tittleHeader{
-   background-image: url("../img/banner.jpg");
-   height: 300px;
+.tittleHeader {
+  background-image: url("../img/banner.jpg");
+  height: 300px;
 }
-.tittleHeader h1{
-    color: white;
-    font-size: 3rem;
-    display: flex;
-    font-family: "Roboto Slab", serif;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    margin: 0;
-    font-weight: 600;
-    text-transform: uppercase;
+.tittleHeader h1 {
+  color: white;
+  font-size: 3rem;
+  display: flex;
+  font-family: "Roboto Slab", serif;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
 }
-.titlePrincipal{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.bannerProducts{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+.titlePrincipal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.carousel-inner{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: -220px;
+.bannerProducts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-
-.carousel-item{
-    width: 100%;
-    height: 100%;
-    display: flex;
-   
+.carousel-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -220px;
 }
 
-
-
-.productListContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-    align-items: center;
-    gap: 40px;
+.carousel-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
-.containerCardImg{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background-color: white;
-    border-radius: 10px;
-    height: 198.8px;
+.productListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+  gap: 40px;
 }
 
-.card{
-    width: 300px;
-    height: 531px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 10px;
-    background-color: #ddf5fa57;
-}
-.card img{
-    width: 60%;
-      
-}
-.card-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-.card-text{
-    font-size: 16px;
-    text-transform: capitalize;
-    font-weight: 600;
-    margin: 0px;
+.containerCardImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+  border-radius: 10px;
+  height: 198.8px;
 }
 
-.acctionsButtonPage{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    align-items: center;
+.card {
+  width: 300px;
+  height: 531px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: #ddf5fa57;
+}
+.card img {
+  width: 60%;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.card-text {
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 600;
+  margin: 0px;
+}
+
+.acctionsButtonPage {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  align-items: center;
 }
 .acctionsButtonPage a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
-.textPage{
-    text-align: center;
-    margin-top: 15px;
-    font-weight: 600;
+.textPage {
+  text-align: center;
+  margin-top: 15px;
+  font-weight: 600;
 }
-.selectContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 20px;
-    margin-bottom: 50px;
+.selectContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
-.selectContainer select{
-    padding: 10px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border-radius: 5px;
-    width: 20%;
-}
-
-.accordion-button collapsed{
-    background-color: red;
-    color: black;
-    border: 1px solid black;
-    border-radius: 5px;
-    font-weight: 600;
+.selectContainer select {
+  padding: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 20%;
 }
 
-.backGroundColorAccordion{
-    background-color: #F0FAFC;
-    color: black;
-    border: 0.1px solid rgba(180, 195, 224, 0.199);
-    font-weight: 600;
-    width: 10%;
-    
+.accordion-button collapsed {
+  background-color: red;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-weight: 600;
 }
-.accordion-header{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+
+.backGroundColorAccordion {
+  background-color: #f0fafc;
+  color: black;
+  border: 0.1px solid rgba(180, 195, 224, 0.199);
+  font-weight: 600;
+  width: 10%;
+}
+.accordion-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 /* navbar */
-.menuCollap{
-    display: flex;
-    justify-content: start;
-    align-items: start;
-  }
-  
-  .menuCollap p {
-  
-    color: white;
-    text-align: center;
-  }
-  
-  .menuCollap i{
-    text-decoration: none;
-    color: white;
-    font-size: 15px;
-  }
-  
-  .containerLogOut{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .textoRol{
-    margin: 0px;
-  }
-  
-  .buttonLogOut{
-    font-size: 14px;
-   
-  }
-  
-  .navBarOpt{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .infoUserNav{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  .containerBtn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-  }
-  .widthButton{
-    width:50%;
-    text-align: center;
-  }
-  .widthButtonAdd{
-     width: 200px;
-  }
-  .widhtInput{
-    width: 60%;
-  }
+.menuCollap {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
 
-  
-  .btn-primary {
-    --bs-btn-bg: rgba(161, 206, 209, 0.555);
-    --bs-btn-border-color: none;
-    --bs-btn-color: #333;
-    --bs-btn-hover-bg: rgba(161, 206, 209, 0.555);
-    font-weight: 600;
-    /* width: 200px; */
-  }
+.menuCollap p {
+  color: white;
+  text-align: center;
+}
 
+.menuCollap i {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+}
 
-  .button-container {
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 0px;
-    margin-bottom: 70px;
-    margin-right: 5px;
-    z-index: 1000;
+.containerLogOut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.textoRol {
+  margin: 0px;
+}
+
+.buttonLogOut {
+  font-size: 14px;
+}
+
+.navBarOpt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.infoUserNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.containerBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+.widthButton {
+  width: 50%;
+  text-align: center;
+}
+.widthButtonAdd {
+  width: 200px;
+}
+.widhtInput {
+  width: 60%;
+}
+
+.btn-primary {
+  --bs-btn-bg: rgba(161, 206, 209, 0.555);
+  --bs-btn-border-color: none;
+  --bs-btn-color: #333;
+  --bs-btn-hover-bg: rgba(161, 206, 209, 0.555);
+  font-weight: 600;
+  /* width: 200px; */
+}
+
+.button-container {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 0px;
+  margin-bottom: 70px;
+  margin-right: 5px;
+  z-index: 1000;
 }
 
 .circular-button {
-    background-color: rgba(161, 206, 209, 0.555);
-    border: none;
-    color: black;
-    font-size: 16px;
-    font-weight: bold;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-    outline: none;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: rgba(161, 206, 209, 0.555);
+  border: none;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .circular-button:hover {
-    transform: scale(1.1);
-    background-color: rgba(161, 206, 209, 0.719);
-    color: white;
-    transition: all 0.3s ease;
-
+  transform: scale(1.1);
+  background-color: rgba(161, 206, 209, 0.719);
+  color: white;
+  transition: all 0.3s ease;
 }
 
+footer {
+  background-color: #333;
+  color: white;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 200px;
+}

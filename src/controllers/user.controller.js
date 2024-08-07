@@ -132,9 +132,9 @@ class UserController {
       const userExists = await usersService.findUser(email);
       if (!userExists) {
         req.logger.info(`Usuario no encontrado`);
-        return res.status(400).send("Usuario no encontrado");
+        return res.status(400).redirect("/user-not-found");
       } else if (isValidPassword(password, userExists) === false) {
-        return res.status(400).send("Credenciales invalidas");
+        return res.status(400).redirect("/password-invalid-user");
       }
       const last_connection = new Date();
 
