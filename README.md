@@ -2,7 +2,7 @@
 
 Mi nombre es Lucas Aspee , este es mi proyecto final .
 
-El proyecto es una api de un ecommerce, desarrollada utilizando express y mongodb para el back y handlebars para las vistas del front, a continuacion se explica mas en detalle todas las funcionalidades.
+El proyecto es una api de un ecommerce con el objetivo de simular el proceso completo de compra de un ecommerce real. Fue desarrollada utilizando express y mongodb para el back y handlebars para las vistas del front , a continuacion se explica mas en detalle todas las funcionalidades.
 
 
 ## Requerimientos
@@ -42,6 +42,25 @@ Sistema de registro , para nuevos usuarios
 
 ## Recuperacion de contraseña
 Para recuperar contraseña se debera ingresar un email, si es valido se enviara a su casilla de email un correo con informacion como un token y un enlace para recuperar la contraseña. La nueva contraseña debera ser distinta a la anterior. 
+
+## Perfil
+Al realizar el login exitoso se redirecionará al perfil del usuario, en donde contaremos con diferentes opciones como, tienda,chat,carrito,documentacion. 
+Por defecto el rol del usuario al ingresar  es "user" el cual se podra actualizar para obtener mas beneficios dentro del sitio utilizando el boton premium.
+[![current.png](https://i.postimg.cc/SRs8n3Ly/current.png)](https://postimg.cc/XGRXh2Dh)
+
+## Tienda
+En esta seccion podremos encontrar una lista de productos, filtrarlos por determinados parametros y agregar los que deseemos a nuestro carrito , para luego continuar con el proceso de compra.
+[![tienda.png](https://i.postimg.cc/GmQyjbMc/tienda.png)](https://postimg.cc/211ykNRJ)
+
+## Carrito
+Aqui se visualizan en detalle los productos seleccionados en la vista anterior. Se puede eliminar un producto , vaciar el carrito entero o bien finalizar la compra. Al elegir la opcion finalizar la compra , se validara el stock de los productos agregados
+,en caso  de no haber stock de algun producto que se desea comprar este quedara en el carrito y no se sumara al total de la compra final.
+[![cart.png](https://i.postimg.cc/QMCHk19b/cart.png)](https://postimg.cc/xkrf9kPJ)
+
+## Checkout
+Si la compra se realizo de forma exitosa podremos ver algunos detalles en el checkout. Se enviara un email al correo del usuario con todos los datos en forma detallada de su compra.
+[![checkout.png](https://i.postimg.cc/7ZWx4ch3/checkout.png)](https://postimg.cc/Xr9Mcswq)
+
 
 
 
