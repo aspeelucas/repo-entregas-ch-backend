@@ -16,7 +16,7 @@ El proyecto es una api de un ecommerce con el objetivo de simular el proceso com
 
 ## Modo de ejecucion local
 En la consola escribir el siguiente comando :
-```
+```bash
 - npm run dev
 ```
 
@@ -83,12 +83,20 @@ El perfil de administrador habilita dos opciones. La primera es la de crear , ed
 
 ## Creado con :
 
-* [] 
-* [] 
-* [] 
-* [] 
-* [] 
-* [] 
+* [Javascript] 
+* [Express] 
+* [Mongoose]
+* [Boostrap] 
+* [Socket.io] 
+* [Jsonwebtoken] 
+* [Bcryp]
+* [Commander]
+* [Cookie-parser]
+* [Multer]
+* [Nodemailer]
+* [Passport]
+* [Swagger]
+* [Winstone]
 
 
 ## Autor
