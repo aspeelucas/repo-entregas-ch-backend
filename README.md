@@ -71,7 +71,7 @@ Aqui se podra crear, editar y eliminar los productos que el usuario desee vender
 [![premium1.png](https://i.postimg.cc/cLYD1t4F/premium1.png)](https://postimg.cc/dhsR41CC)
 [![premium2.png](https://i.postimg.cc/j2LXpLFQ/premium2.png)](https://postimg.cc/H81X5sHV)
 
-###Perfil de administrador
+### Perfil de administrador
 El perfil de administrador habilita dos opciones. La primera es la de crear , editar y eliminar cualquier producto que se haya creado y la segunda nos permite gestionar los usuarios existentes , de tal forma que podemos cambiar el rol , eliminar y hacer una limpieza de todos los usuarios que no se hayan conectado por mas de dos dias.
 [![panel-de-admin.png](https://i.postimg.cc/hjWc9923/panel-de-admin.png)](https://postimg.cc/jWXpTJ0z)
 [![crear-productos-admin.png](https://i.postimg.cc/rwsVcydg/crear-productos-admin.png)](https://postimg.cc/68sJfXfG)
