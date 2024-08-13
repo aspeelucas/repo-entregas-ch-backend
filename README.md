@@ -34,7 +34,7 @@ https://top-ecommerce.up.railway.app/
 ### Login .
 Para acceder al sitio deberemos ingresar un usuario y contraseña valida , estos datos se encuentran almacenados en la base de datos y son consultados atraves del servidor.Tambien existe la posibilidad e logearse mediante una cuenta de github.
 En caso de se ingrese datos incorrectos se mostraran los mensajes correspondientes a cada error en patalla, como "contraseña invalida" o "usuario no existente".
-[![Captura-de-pantalla-2024-08-07-100618.png](https://i.postimg.cc/k4NRY9sM/Captura-de-pantalla-2024-08-07-100618.png)](https://postimg.cc/623QTkFF)
+#### [![Captura-de-pantalla-2024-08-07-100618.png](https://i.postimg.cc/k4NRY9sM/Captura-de-pantalla-2024-08-07-100618.png)](https://postimg.cc/623QTkFF)
 
 ### Register.
 Sistema de registro , para nuevos usuarios
