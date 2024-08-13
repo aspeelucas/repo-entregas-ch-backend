@@ -9,15 +9,15 @@ El proyecto es una api de un ecommerce con el objetivo de simular el proceso com
 
 
 1- Para el correcto funcionamiento es necesario instalar las dependencias figuradas en el package.json
-```
-- npm i
+```bash
+npm i
 ```
 
 
 ## Modo de ejecucion local
 En la consola escribir el siguiente comando :
 ```bash
-- npm run dev
+npm run dev
 ```
 
 NOTA: La api se ejectura de manera de local en el puerto 8080 , la ruta base es http://localhost:8080/.
