@@ -42,6 +42,7 @@ Sistema de registro , para nuevos usuarios
 
 ### Recuperacion de contraseña
 Para recuperar contraseña se debera ingresar un email, si es valido se enviara a su casilla de email un correo con informacion como un token y un enlace para recuperar la contraseña. La nueva contraseña debera ser distinta a la anterior. 
+[![password.png](https://i.postimg.cc/XNtmXVDQ/password.png)](https://postimg.cc/F1gDBQvL)
 
 ### Perfil
 Al realizar el login exitoso se redirecionará al perfil del usuario, en donde contaremos con diferentes opciones como, tienda,chat,carrito,documentacion. 
